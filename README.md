@@ -1,2 +1,4 @@
 # AircraftCompetitionProgram
-This is a program to manage aircraft competitions
+##First Steps
+1. [Download Project]()
+2. [Configure XML]()
