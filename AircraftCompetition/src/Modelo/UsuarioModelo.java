@@ -19,35 +19,35 @@ public class UsuarioModelo {
 	}
 
 
-	private String getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
-	private String getApellidos() {
+	public String getApellidos() {
 		return apellidos;
 	}
 
-	private String getNlicencia() {
+	public String getNlicencia() {
 		return nlicencia;
 	}
 
-	private String getContrasena() {
+	public String getContrasena() {
 		return contrasena;
 	}
 
-	private void setNombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	private void setApellidos(String apellidos) {
+	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
 
-	private void setNlicencia(String nlicencia) {
+	public void setNlicencia(String nlicencia) {
 		this.nlicencia = nlicencia;
 	}
 
-	private void setContrasena(String contrasena) {
+	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
 	
