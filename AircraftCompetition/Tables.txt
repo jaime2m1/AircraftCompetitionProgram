@@ -1,0 +1,46 @@
+CREATE TABLE Usuarios(
+	nombre VARCHAR(20) NOT NULL,
+	apellidos VARCHAR(40) NOT NULL,
+	nlicencia INTEGER NOT NULL PRIMARY KEY,
+	contrasena VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE Competicion(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	nombre VARCHAR(20) NOT NULL,
+	fecha DATE NOT NULL
+);
+
+CREATE TABLE UsuarioCompeticion(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	usuarioid INT NOT NULL,
+	competicionid INT NOT NULL,
+	FOREIGN KEY (usuarioid) REFERENCES Usuarios(nlicencia),
+	FOREIGN KEY (competicionid) REFERENCES Competicion(id)
+);
+
+CREATE TABLE Manga(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	competicionid INT NOT NULL,
+	nmanga INT NOT NULL,
+	FOREIGN KEY (competicionid) REFERENCES Competicion(id)
+);
+
+CREATE TABLE Puntuacion(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	usuarioid INT NOT NULL,
+	tiempo INT NOT NULL,
+	distancia INT NOT NULL,
+	altura INT NOT NULL,
+	penalización INT NOT NULL,
+	FOREIGN KEY (usuarioid) REFERENCES Usuarios(nlicencia)
+);
+
+CREATE TABLE Grupos(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	mangaid INT NOT NULL,
+	puntuacionid INT NOT NULL,
+	ngrupo INT NOT NULL,
+	FOREIGN KEY (mangaid) REFERENCES Manga(id),
+	FOREIGN KEY (puntuacionid) REFERENCES Puntuacion(id)
+);
