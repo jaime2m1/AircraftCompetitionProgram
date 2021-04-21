@@ -25,13 +25,16 @@ public class UserDAO {
 	final private String user = "Aircraft";
 	final private String passwd = "Competition";
 	
-	private String insertUsuario = "INSERT INTO Usuarios (nombre, apellidos, nlicencia, contrasena) VALUES(?,?,?,?)";
+	private String insertUsuario = "INSERT INTO Usuarios (nombre, apellidos, nlicencia, contrasena) VALUES(?, ?, ?, ?)";
 	private String deleteUsuario = "DELETE FROM Usuarios WHERE nlicencia = ?";
-	private String getAllUsuarios = "Select nombre, apellidos, nlicencia, contrasena FROM Usuarios";
+	private String updateUsuario = "UPDATE Usuarios SET nombre = ?, apellidos = ?, contrasena = ? WHERE nlicencia = ?";
+	private String getAllUsuarios = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios";
+	private String getUsuario = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios WHERE nlicencia = ?";
 	
 	
-	public boolean connectDB() throws SQLException {
-		connect = DriverManager.getConnection("jdbc:mysql://" + host + "/feedback?"
+	public boolean connectDB() throws SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		connect = DriverManager.getConnection("jdbc:mysql://" + host + "/AircraftCompetitionDB?"
 		              + "user=" + user + "&password=" + passwd );
 		return true;
 	}
@@ -43,29 +46,40 @@ public class UserDAO {
 			UsuarioModelo usuario = new UsuarioModelo();
 			usuario.setNombre(resultSet.getString("nombre"));
 			usuario.setApellidos(resultSet.getString("apellidos"));
-			usuario.setNlicencia(resultSet.getString("nlicencia"));
+			usuario.setNlicencia(resultSet.getInt("nlicencia"));
 			usuario.setContrasena(resultSet.getString("contrasena"));
 			listaUsuarios.add(usuario);
 		}
 		return listaUsuarios;
 	}
-	public UsuarioModelo getUsuario(int id) {
+	public UsuarioModelo getUsuario(int id) throws SQLException {
+		preparedStatement = connect.prepareStatement(getUsuario);
+		preparedStatement.setInt(1, id);
+		resultSet = preparedStatement.executeQuery();
 		return null;
 	}
 	public boolean delUsuario(int id) throws SQLException {
 		preparedStatement = connect.prepareStatement(deleteUsuario);
+		preparedStatement.setInt(1, id);
+		preparedStatement.executeQuery();
 		return true;
 	}
 	public boolean addUsuario(UsuarioModelo usuario) throws SQLException {
 		preparedStatement = connect.prepareStatement(insertUsuario);
-		preparedStatement.setString(0, usuario.getNombre());
-		preparedStatement.setString(1, usuario.getApellidos());
-		preparedStatement.setString(2, usuario.getNlicencia());
-		preparedStatement.setString(3, usuario.getContrasena());
+		preparedStatement.setString(1, usuario.getNombre());
+		preparedStatement.setString(2, usuario.getApellidos());
+		preparedStatement.setInt(3, usuario.getNlicencia());
+		preparedStatement.setString(4, usuario.getContrasena());
 		preparedStatement.executeUpdate();
 		return true;
 	}
-	public boolean modUsuario(int id, UsuarioModelo usuario) {
+	public boolean modUsuario(int id, UsuarioModelo usuario) throws SQLException {
+		preparedStatement = connect.prepareStatement(updateUsuario);
+		preparedStatement.setString(1, usuario.getNombre());
+		preparedStatement.setString(2, usuario.getApellidos());
+		preparedStatement.setString(3, usuario.getContrasena());
+		preparedStatement.setInt(4, usuario.getNlicencia());
+		preparedStatement.executeUpdate();
 		return true;
 	}
 }

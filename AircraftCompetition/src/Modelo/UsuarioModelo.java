@@ -3,14 +3,14 @@ package Modelo;
 public class UsuarioModelo {
 	private String nombre;
 	private String apellidos;
-	private String nlicencia;
+	private int nlicencia;
 	private String contrasena;
 	
 	public UsuarioModelo() {
 		
 	}
 
-	public UsuarioModelo(String nombre, String apellidos, String nlicencia, String contrasena) {
+	public UsuarioModelo(String nombre, String apellidos, int nlicencia, String contrasena) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -27,7 +27,7 @@ public class UsuarioModelo {
 		return apellidos;
 	}
 
-	public String getNlicencia() {
+	public int getNlicencia() {
 		return nlicencia;
 	}
 
@@ -43,7 +43,7 @@ public class UsuarioModelo {
 		this.apellidos = apellidos;
 	}
 
-	public void setNlicencia(String nlicencia) {
+	public void setNlicencia(int nlicencia) {
 		this.nlicencia = nlicencia;
 	}
 

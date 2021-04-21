@@ -7,17 +7,17 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.RegisterController">
    <children>
-      <TextField layoutX="29.0" layoutY="56.0" />
-      <TextField layoutX="29.0" layoutY="113.0" />
-      <TextField layoutX="29.0" layoutY="163.0" />
-      <PasswordField layoutX="29.0" layoutY="215.0" />
-      <PasswordField layoutX="29.0" layoutY="263.0" />
+      <TextField fx:id="nombreLabel" layoutX="29.0" layoutY="56.0" />
+      <TextField fx:id="apellidosLabel" layoutX="29.0" layoutY="113.0" />
+      <TextField fx:id="nlicenciaLabel" layoutX="29.0" layoutY="163.0" />
+      <PasswordField fx:id="contrasenaLabel" layoutX="29.0" layoutY="215.0" />
+      <PasswordField fx:id="repcontrasenaLabel" layoutX="29.0" layoutY="263.0" />
       <Label layoutX="29.0" layoutY="39.0" text="Nombre" />
       <Label layoutX="29.0" layoutY="146.0" text="Nº licencia" />
       <Label layoutX="29.0" layoutY="96.0" text="Apellidos" />
       <Label layoutX="29.0" layoutY="200.0" text="Contraseña" />
       <Label layoutX="28.0" layoutY="246.0" text="Repetir contraseña" />
-      <Button layoutX="113.0" layoutY="334.0" mnemonicParsing="false" text="Registrarse" />
+      <Button layoutX="113.0" layoutY="334.0" mnemonicParsing="false" onAction="#registerUser" text="Registrarse" />
       <Button mnemonicParsing="false" onAction="#gotoLoginCreate" text="Back" />
    </children>
 </AnchorPane>
