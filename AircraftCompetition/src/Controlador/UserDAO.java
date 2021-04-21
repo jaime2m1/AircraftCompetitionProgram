@@ -22,6 +22,7 @@ public class UserDAO {
 	private ResultSet resultSet = null;
 	
 	final private String host = "jaime2m1.gq";
+	final private String database = "AircraftCompetitionDB";
 	final private String user = "Aircraft";
 	final private String passwd = "Competition";
 	
@@ -34,7 +35,7 @@ public class UserDAO {
 	
 	public boolean connectDB() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		connect = DriverManager.getConnection("jdbc:mysql://" + host + "/AircraftCompetitionDB?"
+		connect = DriverManager.getConnection("jdbc:mysql://" + host + "/"+database+"?"
 		              + "user=" + user + "&password=" + passwd );
 		return true;
 	}

@@ -1,3 +1,7 @@
+//MYSQL DATABASE
+//Remember to configure the server to acces from the internet
+//Remenber to create a not local user
+
 CREATE TABLE Usuarios(
 	nombre VARCHAR(20) NOT NULL,
 	apellidos VARCHAR(40) NOT NULL,

@@ -2,17 +2,19 @@ package Controlador;
 
 import java.io.IOException;
 
+import Vista.DBConfigController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
-    private Stage primaryStage;
+    private static Stage primaryStage;
     private BorderPane rootLayout;
     private FXMLLoader loader = new FXMLLoader();
 
@@ -63,11 +65,37 @@ public class MainApp extends Application {
         }
     }
     
+    public boolean showDBConfig() {
+    	
+    	try {
+    		FXMLLoader loader = new FXMLLoader();
+        	loader.setLocation(MainApp.class.getResource("../Vista/DBConfigDialog.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Configura DB");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+	        Scene scene = new Scene(page);
+	        dialogStage.setScene(scene);
+	        
+	        DBConfigController controller = loader.getController();
+	        
+	        dialogStage.showAndWait();
+
+	        return controller.isOkClicked();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+    }
+    
 	/**
 	 * Returns the main stage.
 	 * @return
 	 */
-	public Stage getPrimaryStage() {
+	public static Stage getPrimaryStage() {
 		return primaryStage;
 	}
 
