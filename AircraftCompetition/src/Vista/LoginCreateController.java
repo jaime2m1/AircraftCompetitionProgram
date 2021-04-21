@@ -18,6 +18,17 @@ public class LoginCreateController {
 	}
     
     @FXML
+    public void gotoLogin(ActionEvent event) throws IOException {
+    	Parent loginView = FXMLLoader.load(getClass().getResource("../Vista/LoginView.fxml"));
+    	Scene loginScene = new Scene(loginView);
+    	
+    	//Get stage info
+    	Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+    	window.setScene(loginScene);
+    	window.show();
+    }
+    
+    @FXML
     public void gotoRegister(ActionEvent event) throws IOException {
     	Parent registerView = FXMLLoader.load(getClass().getResource("../Vista/RegisterView.fxml"));
     	Scene registerScene = new Scene(registerView);
