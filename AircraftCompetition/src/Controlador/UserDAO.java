@@ -14,34 +14,42 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-//import java.sql.Statement;
-//import java.util.Date;
 
+/**
+ * @author Jaime,Pablo,Juan
+ *
+ *         Esta clase es el DAO de {@link Modelo.UsuarioModelo} 
+ *         Con las funciones de: 
+ *         {@link #connectDB()} 
+ *         {@link #getAllUsuarios()}
+ *         {@link #getUsuario()} 
+ *         {@link #delUsuario()} 
+ *         {@link #addUsuario()}
+ *         {@link #modUsuario()}
+ */
 public class UserDAO {
-	
-	public ArrayList<UsuarioModelo> listaUsuarios =  new ArrayList<UsuarioModelo>();
-	
+
+	public ArrayList<UsuarioModelo> listaUsuarios = new ArrayList<UsuarioModelo>();
+
 	private Connection connect = null;
-	//private Statement statement = null;
+	// private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
-	/*
+
 	private String host = "jaime2m1.gq";
 	private String database = "AircraftCompetitionDB";
 	private String user = "Aircraft";
 	private String passwd = "Competition";
-	*/
-	private String host = "p";
-	private String database = "p";
-	private String user = "p";
-	private String passwd = "p";
-	
+
 	private String insertUsuario = "INSERT INTO Usuarios (nombre, apellidos, nlicencia, contrasena) VALUES(?, ?, ?, ?)";
 	private String deleteUsuario = "DELETE FROM Usuarios WHERE nlicencia = ?";
 	private String updateUsuario = "UPDATE Usuarios SET nombre = ?, apellidos = ?, contrasena = ? WHERE nlicencia = ?";
 	private String getAllUsuarios = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios";
 	private String getUsuario = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios WHERE nlicencia = ?";
-	
+
+	/**
+	 * Constructor que obtiene la configuración del XML
+	 */
 	public UserDAO() {
 		DBConfigDAO xmlDAO = new DBConfigDAO();
 		try {
@@ -55,18 +63,32 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Método que establece la conexión a la base de datos
+	 * 
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean connectDB() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		connect = DriverManager.getConnection("jdbc:mysql://" + host + "/"+database+"?"
-		              + "user=" + user + "&password=" + passwd );
+		connect = DriverManager
+				.getConnection("jdbc:mysql://" + host + "/" + database + "?" + "user=" + user + "&password=" + passwd);
 		return true;
 	}
-	public ArrayList<UsuarioModelo> getAllUsuarios() throws SQLException{
+
+	/**
+	 * Método que devuelve un ArrayList de Usuarios
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<UsuarioModelo> getAllUsuarios() throws SQLException {
 		listaUsuarios.clear();
 		preparedStatement = connect.prepareStatement(getAllUsuarios);
 		resultSet = preparedStatement.executeQuery();
-		while(resultSet.next()) {
+		while (resultSet.next()) {
 			UsuarioModelo usuario = new UsuarioModelo();
 			usuario.setNombre(resultSet.getString("nombre"));
 			usuario.setApellidos(resultSet.getString("apellidos"));
@@ -76,18 +98,42 @@ public class UserDAO {
 		}
 		return listaUsuarios;
 	}
+
+	/**
+	 * Método que obtiene un usuario específico
+	 * 
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public UsuarioModelo getUsuario(int id) throws SQLException {
 		preparedStatement = connect.prepareStatement(getUsuario);
 		preparedStatement.setInt(1, id);
 		resultSet = preparedStatement.executeQuery();
 		return null;
 	}
+
+	/**
+	 * Método encargado de borrar un usuario específico
+	 * 
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean delUsuario(int id) throws SQLException {
 		preparedStatement = connect.prepareStatement(deleteUsuario);
 		preparedStatement.setInt(1, id);
 		preparedStatement.executeQuery();
 		return true;
 	}
+
+	/**
+	 * Método encargado de añadir un usuario
+	 * 
+	 * @param usuario
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean addUsuario(UsuarioModelo usuario) throws SQLException {
 		preparedStatement = connect.prepareStatement(insertUsuario);
 		preparedStatement.setString(1, usuario.getNombre());
@@ -97,6 +143,15 @@ public class UserDAO {
 		preparedStatement.executeUpdate();
 		return true;
 	}
+
+	/**
+	 * Método encargado de modificar un usuario específico
+	 * 
+	 * @param id
+	 * @param usuario
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean modUsuario(int id, UsuarioModelo usuario) throws SQLException {
 		preparedStatement = connect.prepareStatement(updateUsuario);
 		preparedStatement.setString(1, usuario.getNombre());

@@ -15,6 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Clase controlador de RegisterView
+ * 
+ * @author Jaime
+ */
 public class RegisterController {
 	
 	private UserDAO dao = new UserDAO();
@@ -30,6 +35,9 @@ public class RegisterController {
     @FXML
     private TextField repcontrasenaLabel;
 	
+	/**
+	 * Realizamos la conexión a la base de datos
+	 */
 	@FXML
 	private void initialize() {
 		try {
@@ -51,6 +59,12 @@ public class RegisterController {
     	window.show();
     }
     
+    /**
+     * Registramos al usuario
+     * 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void registerUser(ActionEvent event) throws IOException{
     	UsuarioModelo usuario = new UsuarioModelo();

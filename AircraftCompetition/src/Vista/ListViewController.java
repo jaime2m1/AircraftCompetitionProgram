@@ -5,13 +5,17 @@ import java.sql.SQLException;
 import Controlador.CompetitionDAO;
 import Modelo.CompeticionModelo;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-//import javafx.scene.control.cell.PropertyValueFactory;
 
+
+/**
+ * @author Jaime,Pablo,Juan
+ * 
+ * Clase controlador de la ListView
+ */
 public class ListViewController {
 	
 	@FXML
@@ -29,7 +33,9 @@ public class ListViewController {
     	setTableData();
     }
     
-    @SuppressWarnings("unchecked")
+    /**
+     * Establecemos los datos de la tabla
+     */
 	public void setTableData() {
     	System.out.println("Set table data");
     	CompetitionDAO dao = new CompetitionDAO();

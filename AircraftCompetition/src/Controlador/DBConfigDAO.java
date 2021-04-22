@@ -19,6 +19,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+/**
+ * @author Jaime,Pablo,Juan
+ *
+ * Esta es la clase es el DAO de la configuración del XML
+ * El XML es el encargado de guardar la configuración de la Base de Datos
+ */
 public class DBConfigDAO {
 	DocumentBuilderFactory dbf;
 	File file;
@@ -27,6 +33,14 @@ public class DBConfigDAO {
 		dbf = DocumentBuilderFactory.newInstance();
 	}
 	
+	/**
+	 * Este método es el encargado de obtener la información del XML
+	 * 
+	 * @return
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	public String[] readDBConfig() throws ParserConfigurationException, SAXException, IOException {
 		DocumentBuilder db = dbf.newDocumentBuilder();  
 		Document doc = db.parse(file);  
@@ -43,6 +57,15 @@ public class DBConfigDAO {
 		return DBConfig;
 	}
 	
+	/**
+	 * Este método es el encargado de actualizar el XML
+	 * 
+	 * @param DBConfig
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws TransformerException
+	 */
 	public void updateDBConfig(String[] DBConfig) throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		DocumentBuilder db = dbf.newDocumentBuilder();  
 		Document doc = db.parse(file);  
