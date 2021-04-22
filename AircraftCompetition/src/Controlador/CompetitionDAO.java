@@ -7,6 +7,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import Modelo.CompeticionModelo;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -72,6 +74,20 @@ public class CompetitionDAO {
 		}
 		return listaUsuarios;
 	}
+	
+	public ObservableList<CompeticionModelo> getAllCompeticionesOL() throws SQLException{
+		ObservableList<CompeticionModelo> listaCompeticionesOL = FXCollections.observableArrayList();
+		preparedStatement = connect.prepareStatement(getAllCompeticiones);
+		resultSet = preparedStatement.executeQuery();
+		while(resultSet.next()) {
+			CompeticionModelo competicion = new CompeticionModelo();
+			competicion.setNombre(resultSet.getString("nombre"));
+			competicion.setFecha(resultSet.getDate("fecha"));
+			listaCompeticionesOL.add(competicion);
+		}
+		return listaCompeticionesOL;
+	}
+	
 	public CompeticionModelo getCompeticion(int id) throws SQLException {
 		preparedStatement = connect.prepareStatement(getCompeticion);
 		preparedStatement.setInt(1, id);

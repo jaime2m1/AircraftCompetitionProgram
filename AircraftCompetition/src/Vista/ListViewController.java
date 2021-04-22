@@ -4,10 +4,13 @@ import java.sql.SQLException;
 
 import Controlador.CompetitionDAO;
 import Modelo.CompeticionModelo;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+//import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ListViewController {
 	
@@ -19,7 +22,6 @@ public class ListViewController {
     private TableColumn<CompeticionModelo, String> fecha;
     
     public ListViewController() {
-    	
     }
     
     @FXML
@@ -27,14 +29,19 @@ public class ListViewController {
     	setTableData();
     }
     
-    public void setTableData() {
+    @SuppressWarnings("unchecked")
+	public void setTableData() {
     	System.out.println("Set table data");
     	CompetitionDAO dao = new CompetitionDAO();
     	ObservableList<CompeticionModelo> listaCompeticiones;
     	try {
-			listaCompeticiones = (ObservableList<CompeticionModelo>) dao.getAllCompeticiones();
+    		dao.connectDB();
+    		System.out.println("Establecemos los datos de la tabla");
+    		nombre.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getNombre()));
+    		fecha.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getFecha().toString()));
+			listaCompeticiones = dao.getAllCompeticionesOL();
 			competitionTable.setItems(listaCompeticiones);
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

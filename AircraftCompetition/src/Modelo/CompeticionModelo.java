@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class CompeticionModelo {
 	private int id;
-	private String nombre;
+	public String nombre;
 	private Date fecha;
 	
 	public CompeticionModelo() {

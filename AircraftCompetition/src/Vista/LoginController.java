@@ -8,7 +8,7 @@ import Controlador.MainApp;
 import Controlador.UserDAO;
 import Modelo.UsuarioModelo;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+//import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+//import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -91,17 +92,14 @@ public class LoginController {
 		Stage primaryStage = MainApp.getPrimaryStage();
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("../Vista/RootLayoutCompetition.fxml"));
-        BorderPane rootLayout = (BorderPane) loader.load();
+        loader.setLocation(MainApp.class.getResource("../Vista/ListView.fxml"));
+        AnchorPane rootLayout = (AnchorPane) loader.load();
         
         // Show the scene containing the root layout.
         Scene scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
-        primaryStage.show();
-		
-        loader.setLocation(MainApp.class.getResource("../Vista/ListView.fxml"));
-        //AnchorPane listView = (AnchorPane) loader.load();
+        primaryStage.centerOnScreen();
         
-        // Set LoginCreate into the center of root layout.
-        //rootLayout.setCenter(listView);
+        primaryStage.show();
 	}
 }
