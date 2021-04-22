@@ -7,8 +7,11 @@ public class CompeticionModelo {
 	private String nombre;
 	private Date fecha;
 	
+	public CompeticionModelo() {
+		
+	}
+	
 	public CompeticionModelo(int id, String nombre, Date fecha) {
-		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.fecha = fecha;

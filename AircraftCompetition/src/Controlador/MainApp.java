@@ -20,12 +20,11 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("AddressApp");
-        this.primaryStage.getIcons().add(new Image("file:resources/images/plane.png"));
+        MainApp.primaryStage = primaryStage;
+        MainApp.primaryStage.setTitle("AircraftCompetition");
+        MainApp.primaryStage.getIcons().add(new Image("file:resources/images/plane.png"));
 
         initRootLayout();
-
         showLoginCreate();
     }
     
@@ -69,7 +68,7 @@ public class MainApp extends Application {
     	
     	try {
     		FXMLLoader loader = new FXMLLoader();
-        	loader.setLocation(MainApp.class.getResource("../Vista/DBConfigDialog.fxml"));
+        	loader.setLocation(MainApp.class.getResource("../Vista/RootLayoutCompetition.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			
 			Stage dialogStage = new Stage();
@@ -89,6 +88,40 @@ public class MainApp extends Application {
 			e.printStackTrace();
 			return false;
 		}
+    }
+    
+    /**
+     * Initializes the root layout.
+     */
+    public void initRootLayoutCompetition() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../Vista/RootLayoutCompetition.fxml"));
+            rootLayout = (BorderPane) loader.load();
+            
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void showListCompetition() {
+    	
+    	try {
+            // Load LoginCreate.
+            
+            loader.setLocation(MainApp.class.getResource("../Vista/ListView.fxml"));
+            AnchorPane listView = (AnchorPane) loader.load();
+            
+            // Set LoginCreate into the center of root layout.
+            rootLayout.setCenter(listView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 	/**

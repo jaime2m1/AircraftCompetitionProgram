@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.ListViewController">
+   <children>
+      <TableView fx:id="competitionTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <columns>
+            <TableColumn fx:id="nombre" prefWidth="109.0" text="Nombre" />
+          <TableColumn fx:id="fecha" prefWidth="85.0" text="Fecha" />
+          <TableColumn prefWidth="124.0" text="Nº  Participantes" />
+            <TableColumn prefWidth="571.0" text="Info" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
