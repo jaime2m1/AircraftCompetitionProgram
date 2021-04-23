@@ -59,7 +59,6 @@ public class UserDAO {
 			user = DBConfig[2];
 			passwd = DBConfig[3];
 		} catch (ParserConfigurationException | SAXException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
