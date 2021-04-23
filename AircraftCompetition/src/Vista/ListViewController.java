@@ -24,6 +24,8 @@ public class ListViewController {
     private TableColumn<CompeticionModelo, String> nombre;
     @FXML
     private TableColumn<CompeticionModelo, String> fecha;
+    @FXML
+    private TableColumn<CompeticionModelo, String> nParticipantes;
     
     public ListViewController() {
     }
@@ -45,6 +47,7 @@ public class ListViewController {
     		System.out.println("Establecemos los datos de la tabla");
     		nombre.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getNombre()));
     		fecha.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getFecha().toString()));
+    		nParticipantes.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getNParticipantesSTR()));
 			listaCompeticiones = dao.getAllCompeticionesOL();
 			competitionTable.setItems(listaCompeticiones);
 		} catch (SQLException | ClassNotFoundException e) {

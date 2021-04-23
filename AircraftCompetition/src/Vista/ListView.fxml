@@ -12,7 +12,7 @@
         <columns>
             <TableColumn fx:id="nombre" prefWidth="109.0" text="Nombre" />
           <TableColumn fx:id="fecha" prefWidth="85.0" text="Fecha" />
-          <TableColumn prefWidth="124.0" text="Nº  Participantes" />
+          <TableColumn fx:id="nParticipantes" prefWidth="124.0" text="Nº  Participantes" />
             <TableColumn prefWidth="571.0" text="Info" />
         </columns>
       </TableView>
