@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -8,12 +9,11 @@
 
 <AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.ListViewController">
    <children>
-      <TableView fx:id="competitionTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0">
+      <TableView fx:id="competitionTable" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="40.0">
         <columns>
             <TableColumn fx:id="nombre" prefWidth="109.0" text="Nombre" />
           <TableColumn fx:id="fecha" prefWidth="85.0" text="Fecha" />
-          <TableColumn fx:id="nParticipantes" prefWidth="124.0" text="Nº  Participantes" />
-            <TableColumn prefWidth="571.0" text="Info" />
+          <TableColumn fx:id="nParticipantes" prefWidth="150.0" text="Nº  Participantes" />
         </columns>
       </TableView>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#setTableData" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
@@ -25,5 +25,21 @@
             </ImageView>
          </graphic>
       </Button>
+      <Label fx:id="competicionNombre" layoutX="382.0" layoutY="43.0" text="Competición" AnchorPane.topAnchor="43.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="competicionFecha" layoutX="382.0" layoutY="77.0" text="Fecha">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="competicionNParticipantes" layoutX="382.0" layoutY="107.0" text="Número participantes">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="inscribirse" layoutX="589.0" layoutY="161.0" mnemonicParsing="false" text="Inscribirse" />
    </children>
 </AnchorPane>

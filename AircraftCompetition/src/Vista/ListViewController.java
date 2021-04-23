@@ -7,6 +7,8 @@ import Modelo.CompeticionModelo;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -27,12 +29,27 @@ public class ListViewController {
     @FXML
     private TableColumn<CompeticionModelo, String> nParticipantes;
     
+    @FXML
+    private Label competicionNombre;
+    @FXML
+    private Label competicionFecha;
+    @FXML
+    private Label competicionNParticipantes;
+    
+    @FXML
+    private Button inscribirse;
+    
     public ListViewController() {
     }
     
     @FXML
     private void initialize() {
     	setTableData();
+    	competitionTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCompetitionDetails(newValue));
+    	competicionNombre.setText("");
+        competicionFecha.setText("");
+        competicionNParticipantes.setText("");
+        inscribirse.setVisible(false);
     }
     
     /**
@@ -42,6 +59,7 @@ public class ListViewController {
     	System.out.println("Set table data");
     	CompetitionDAO dao = new CompetitionDAO();
     	ObservableList<CompeticionModelo> listaCompeticiones;
+    	
     	
     	try {
     		dao.connectDB();
@@ -60,6 +78,17 @@ public class ListViewController {
 			e.printStackTrace();
 		}
     }
-    
-    
+	private void showCompetitionDetails(CompeticionModelo competicion) {
+        if (competicion != null) {
+            competicionNombre.setText("Competición "+competicion.getNombre());
+            competicionFecha.setText("Fecha "+competicion.getFecha().toString());
+            competicionNParticipantes.setText(competicion.getNParticipantesSTR()+" participantes");
+            inscribirse.setVisible(true);
+        } else {
+        	competicionNombre.setText("");
+            competicionFecha.setText("");
+            competicionNParticipantes.setText("");
+            inscribirse.setVisible(false);
+        }
+    }
 }
