@@ -30,6 +30,9 @@ public class CompeticionModelo {
 	public int getId() {
 		return id;
 	}
+	public void setId(int id) {
+		this.id=id;
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -60,6 +63,7 @@ public class CompeticionModelo {
 		try {
 			dao.connectDB();
 			this.nParticipantes = dao.getUsuariosDeCompeticion(id).size();
+			System.out.println("nParticipantes de "+this.nombre+" con id "+this.id+" es "+this.nParticipantes);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

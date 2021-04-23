@@ -113,6 +113,7 @@ public class CompetitionDAO {
 		resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
 			CompeticionModelo competicion = new CompeticionModelo();
+			competicion.setId(resultSet.getInt("id"));
 			competicion.setNombre(resultSet.getString("nombre"));
 			competicion.setFecha(resultSet.getDate("fecha"));
 			listaCompeticionesOL.add(competicion);

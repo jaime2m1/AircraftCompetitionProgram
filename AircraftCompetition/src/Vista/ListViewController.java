@@ -42,13 +42,18 @@ public class ListViewController {
     	System.out.println("Set table data");
     	CompetitionDAO dao = new CompetitionDAO();
     	ObservableList<CompeticionModelo> listaCompeticiones;
+    	
     	try {
     		dao.connectDB();
     		System.out.println("Establecemos los datos de la tabla");
-    		nombre.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getNombre()));
+    		
+			listaCompeticiones = dao.getAllCompeticionesOL();
+			for(int i=0; i<listaCompeticiones.size(); i++) {
+				listaCompeticiones.get(i).setNParticipantes();
+			}
+			nombre.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getNombre()));
     		fecha.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getFecha().toString()));
     		nParticipantes.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getNParticipantesSTR()));
-			listaCompeticiones = dao.getAllCompeticionesOL();
 			competitionTable.setItems(listaCompeticiones);
 		} catch (SQLException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
