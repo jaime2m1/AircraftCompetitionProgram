@@ -41,5 +41,6 @@
          </font>
       </Label>
       <Button fx:id="inscribirse" layoutX="589.0" layoutY="161.0" mnemonicParsing="false" text="Inscribirse" />
+      <Label fx:id="loginUsuario" layoutX="53.0" layoutY="11.0" text="Usuario" />
    </children>
 </AnchorPane>

@@ -1,8 +1,16 @@
 package Vista;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import Controlador.CompetitionDAO;
+import Controlador.DBConfigDAO;
+import Controlador.UserCompetitionDAO;
 import Modelo.CompeticionModelo;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
@@ -30,6 +38,8 @@ public class ListViewController {
     private TableColumn<CompeticionModelo, String> nParticipantes;
     
     @FXML
+    private Label loginUsuario;
+    @FXML
     private Label competicionNombre;
     @FXML
     private Label competicionFecha;
@@ -39,11 +49,14 @@ public class ListViewController {
     @FXML
     private Button inscribirse;
     
+    private int nLicencia;
+    
     public ListViewController() {
     }
     
     @FXML
     private void initialize() {
+    	setLoginUsuario();
     	setTableData();
     	competitionTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showCompetitionDetails(newValue));
     	competicionNombre.setText("");
@@ -52,7 +65,8 @@ public class ListViewController {
         inscribirse.setVisible(false);
     }
     
-    /**
+
+	/**
      * Establecemos los datos de la tabla
      */
 	public void setTableData() {
@@ -83,7 +97,7 @@ public class ListViewController {
             competicionNombre.setText("Competición "+competicion.getNombre());
             competicionFecha.setText("Fecha "+competicion.getFecha().toString());
             competicionNParticipantes.setText(competicion.getNParticipantesSTR()+" participantes");
-            inscribirse.setVisible(true);
+            if(checkCompeticionUsuario(competicion)) {inscribirse.setVisible(true);}
         } else {
         	competicionNombre.setText("");
             competicionFecha.setText("");
@@ -91,4 +105,36 @@ public class ListViewController {
             inscribirse.setVisible(false);
         }
     }
+	
+	private void setLoginUsuario() {
+		DBConfigDAO dao = new DBConfigDAO();
+		try {
+			nLicencia = Integer.parseInt(dao.readDBConfig()[4]);
+		} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private boolean checkCompeticionUsuario(CompeticionModelo competicion) {
+		UserCompetitionDAO dao = new UserCompetitionDAO();
+		ArrayList<CompeticionModelo> competiciones;
+		Boolean encontrado = false;
+		
+		try {
+			dao.connectDB();
+			competiciones = dao.getCompeticionesDeUsuario(this.nLicencia);
+			for(int i=0; i<competiciones.size(); i++) {
+				System.out.println("Id de competiciones "+competiciones.get(i).getId()+" = "+competicion.getId());
+				if(competiciones.get(i).getId()==competicion.getId()) {
+					System.out.println("Encontrado coincidencia de competición");
+					encontrado=true;
+				}
+			}
+		} catch (SQLException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return encontrado;
+	}
 }

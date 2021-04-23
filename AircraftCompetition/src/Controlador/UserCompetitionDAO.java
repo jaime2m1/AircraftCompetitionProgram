@@ -42,7 +42,7 @@ public class UserCompetitionDAO {
 			+ "INNER JOIN UsuarioCompeticion uc "
 			+ "ON u.nlicencia = uc.usuarioid "
 			+ "WHERE uc.competicionid = ? ";
-	private String getCompeticionesDeUsuario = "SELECT u.nombre, u.apellidos, u.nlicencia, u.contrasena "
+	private String getCompeticionesDeUsuario = "SELECT c.id, c.nombre, c.fecha "
 			+ "FROM Competicion c "
 			+ "INNER JOIN UsuarioCompeticion uc "
 			+ "ON c.id = uc.usuarioid "
@@ -116,6 +116,7 @@ public class UserCompetitionDAO {
 		resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
 			CompeticionModelo competicion = new CompeticionModelo();
+			competicion.setId(resultSet.getInt("id"));
 			competicion.setNombre(resultSet.getString("nombre"));
 			competicion.setFecha(resultSet.getDate("fecha"));
 			listaCompeticiones.add(competicion);

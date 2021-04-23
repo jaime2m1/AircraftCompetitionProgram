@@ -48,11 +48,12 @@ public class DBConfigDAO {
 		NodeList nodeList = doc.getElementsByTagName("DBConfig");
 		Node node = nodeList.item(0);
 		Element element = (Element) node;
-		String[] DBConfig = new String[4];
+		String[] DBConfig = new String[5];
 		DBConfig[0]=element.getElementsByTagName("host").item(0).getTextContent();
 		DBConfig[1]=element.getElementsByTagName("database").item(0).getTextContent();
 		DBConfig[2]=element.getElementsByTagName("user").item(0).getTextContent();
 		DBConfig[3]=element.getElementsByTagName("password").item(0).getTextContent();
+		DBConfig[4]=element.getElementsByTagName("loginUser").item(0).getTextContent();
 		
 		return DBConfig;
 	}
@@ -77,11 +78,14 @@ public class DBConfigDAO {
 		Node database=element.getElementsByTagName("database").item(0);
 		Node user=element.getElementsByTagName("user").item(0);
 		Node password=element.getElementsByTagName("password").item(0);
+		Node loginUser=element.getElementsByTagName("loginUser").item(0);
 		
 		host.setTextContent(DBConfig[0]);
 		database.setTextContent(DBConfig[1]);
 		user.setTextContent(DBConfig[2]);
 		password.setTextContent(DBConfig[3]);
+		loginUser.setTextContent(DBConfig[4]);
+		
 		
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();

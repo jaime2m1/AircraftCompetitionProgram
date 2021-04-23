@@ -4,6 +4,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
+
+import Controlador.DBConfigDAO;
 import Controlador.MainApp;
 import Controlador.UserDAO;
 import Modelo.UsuarioModelo;
@@ -27,6 +33,8 @@ import javafx.stage.Stage;
 public class LoginController {
 
 	private UserDAO dao = new UserDAO();
+	
+	private UsuarioModelo usuario = new UsuarioModelo();
 
 	@FXML
 	private TextField nlicenciaLabel;
@@ -69,7 +77,6 @@ public class LoginController {
 	 */
 	@FXML
 	public void loginUser(ActionEvent event) throws IOException {
-		UsuarioModelo usuario = new UsuarioModelo();
 		usuario.setNombre("");
 		usuario.setApellidos("");
 		usuario.setNlicencia(Integer.parseInt(nlicenciaLabel.getText()));
@@ -108,6 +115,18 @@ public class LoginController {
 	 * @throws IOException
 	 */
 	private void login() throws IOException {
+		
+		DBConfigDAO dao = new DBConfigDAO();
+		try {
+			String[] DBConfig = dao.readDBConfig();
+			DBConfig[4] = String.valueOf(usuario.getNlicencia());
+			dao.updateDBConfig(DBConfig);
+		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		Stage primaryStage = MainApp.getPrimaryStage();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("../Vista/RootLayoutCompetition.fxml"));
