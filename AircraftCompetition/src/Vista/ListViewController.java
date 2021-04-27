@@ -10,15 +10,22 @@ import org.xml.sax.SAXException;
 
 import Controlador.CompetitionDAO;
 import Controlador.DBConfigDAO;
+import Controlador.MainApp;
 import Controlador.UserCompetitionDAO;
 import Modelo.CompeticionModelo;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 
 /**
@@ -48,6 +55,10 @@ public class ListViewController {
     
     @FXML
     private Button inscribirse;
+    @FXML
+    private Button desinscribirse;
+    @FXML
+    private Button nuevaCompeticion;
     
     private int nLicencia;
     
@@ -63,6 +74,12 @@ public class ListViewController {
         competicionFecha.setText("");
         competicionNParticipantes.setText("");
         inscribirse.setVisible(false);
+        desinscribirse.setVisible(false);
+        nuevaCompeticion.setVisible(false);
+        
+        if(nLicencia==0) {
+        	nuevaCompeticion.setVisible(true);
+        }
     }
     
 
@@ -97,7 +114,14 @@ public class ListViewController {
             competicionNombre.setText("Competición "+competicion.getNombre());
             competicionFecha.setText("Fecha "+competicion.getFecha().toString());
             competicionNParticipantes.setText(competicion.getNParticipantesSTR()+" participantes");
-            if(checkCompeticionUsuario(competicion)) {inscribirse.setVisible(true);}
+            if(!checkCompeticionUsuario(competicion)) {
+            	inscribirse.setVisible(true);
+            	desinscribirse.setVisible(false);
+            	}
+            else {
+            	inscribirse.setVisible(false);
+            	desinscribirse.setVisible(true);
+            }
         } else {
         	competicionNombre.setText("");
             competicionFecha.setText("");
@@ -136,5 +160,31 @@ public class ListViewController {
 			e.printStackTrace();
 		}
 		return encontrado;
+	}
+	
+	@FXML
+	public void gotoNewCompetition(ActionEvent event) throws IOException {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("../Vista/NewCompetition.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Nueva Competición");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(MainApp.getPrimaryStage());
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			NewCompetitionController controller = loader.getController();
+
+			controller.setDialogStage(dialogStage);
+
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

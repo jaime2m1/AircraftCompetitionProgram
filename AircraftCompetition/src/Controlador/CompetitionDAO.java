@@ -159,7 +159,7 @@ public class CompetitionDAO {
 	public boolean addCompeticion(CompeticionModelo competicion) throws SQLException {
 		preparedStatement = connect.prepareStatement(insertCompeticion);
 		preparedStatement.setString(1, competicion.getNombre());
-		preparedStatement.setDate(2, (Date) competicion.getFecha());
+		preparedStatement.setDate(2, competicion.getFechaSQL());
 		preparedStatement.executeUpdate();
 		return true;
 	}
@@ -175,7 +175,7 @@ public class CompetitionDAO {
 	public boolean modCompeticion(int id, CompeticionModelo competicion) throws SQLException {
 		preparedStatement = connect.prepareStatement(updateCompeticion);
 		preparedStatement.setString(1, competicion.getNombre());
-		preparedStatement.setDate(2, (Date) competicion.getFecha());
+		preparedStatement.setDate(2, competicion.getFechaSQL());
 		preparedStatement.setInt(3, id);
 		preparedStatement.executeUpdate();
 		return true;

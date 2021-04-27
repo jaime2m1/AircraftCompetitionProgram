@@ -45,6 +45,15 @@ public class CompeticionModelo {
 	public Date getFecha() {
 		return fecha;
 	}
+	
+	/**
+	 * Hacemos que devuelva la fecha en formato java.sql.Date
+	 * @return
+	 */
+	public java.sql.Date getFechaSQL() {
+		java.sql.Date fechasql = new java.sql.Date(fecha.getTime());
+		return fechasql;
+	}
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
