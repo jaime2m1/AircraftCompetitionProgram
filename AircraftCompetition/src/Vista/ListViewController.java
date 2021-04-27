@@ -61,6 +61,7 @@ public class ListViewController {
     private Button nuevaCompeticion;
     
     private int nLicencia;
+    private CompeticionModelo competicion;
     
     public ListViewController() {
     }
@@ -111,6 +112,7 @@ public class ListViewController {
     }
 	private void showCompetitionDetails(CompeticionModelo competicion) {
         if (competicion != null) {
+        	this.competicion=competicion;
             competicionNombre.setText("Competición "+competicion.getNombre());
             competicionFecha.setText("Fecha "+competicion.getFecha().toString());
             competicionNParticipantes.setText(competicion.getNParticipantesSTR()+" participantes");
@@ -148,6 +150,7 @@ public class ListViewController {
 		try {
 			dao.connectDB();
 			competiciones = dao.getCompeticionesDeUsuario(this.nLicencia);
+			System.out.println(competiciones.size());
 			for(int i=0; i<competiciones.size(); i++) {
 				System.out.println("Id de competiciones "+competiciones.get(i).getId()+" = "+competicion.getId());
 				if(competiciones.get(i).getId()==competicion.getId()) {
@@ -160,6 +163,31 @@ public class ListViewController {
 			e.printStackTrace();
 		}
 		return encontrado;
+	}
+	
+	@FXML
+	public void inscribirse(ActionEvent event) throws IOException {
+		UserCompetitionDAO dao = new UserCompetitionDAO();
+		
+		try {
+			dao.connectDB();
+			dao.addUsuarioCompeticion(nLicencia, competicion.getId());
+		} catch (SQLException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@FXML
+	public void desinscribirse(ActionEvent event) throws IOException {
+		UserCompetitionDAO dao = new UserCompetitionDAO();
+		
+		try {
+			dao.connectDB();
+			dao.delUsuarioCompeticion(nLicencia, competicion.getId());
+		} catch (SQLException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML

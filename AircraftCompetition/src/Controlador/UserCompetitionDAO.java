@@ -35,8 +35,9 @@ public class UserCompetitionDAO {
 	private String user = "Aircraft";
 	private String passwd = "Competition";
 	
-	private String insertUsuarioCompeticion = "INSERT INTO UsuarioCompeticion (idusuario, idcompeticion) VALUES(?, ?)";
+	private String insertUsuarioCompeticion = "INSERT INTO UsuarioCompeticion (usuarioid, competicionid) VALUES(?, ?)";
 	private String deleteUsuarioCompeticion = "DELETE FROM UsuarioCompeticion WHERE id = ?";
+	private String deleteUsuarioCompeticionIds = "DELETE FROM UsuarioCompeticion WHERE usuarioid = ? and competicionid = ?";
 	private String getUsuariosDeCompeticion = "SELECT u.nombre, u.apellidos, u.nlicencia, u.contrasena "
 			+ "FROM Usuarios u "
 			+ "INNER JOIN UsuarioCompeticion uc "
@@ -45,7 +46,7 @@ public class UserCompetitionDAO {
 	private String getCompeticionesDeUsuario = "SELECT c.id, c.nombre, c.fecha "
 			+ "FROM Competicion c "
 			+ "INNER JOIN UsuarioCompeticion uc "
-			+ "ON c.id = uc.usuarioid "
+			+ "ON c.id = uc.competicionid "
 			+ "WHERE uc.usuarioid = ? ";
 	
 	/**
@@ -116,9 +117,10 @@ public class UserCompetitionDAO {
 		resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
 			CompeticionModelo competicion = new CompeticionModelo();
-			competicion.setId(resultSet.getInt("id"));
-			competicion.setNombre(resultSet.getString("nombre"));
-			competicion.setFecha(resultSet.getDate("fecha"));
+			competicion.setId(resultSet.getInt("c.id"));
+			competicion.setNombre(resultSet.getString("c.nombre"));
+			competicion.setFecha(resultSet.getDate("c.fecha"));
+			System.out.println("Anadido id="+ competicion.getId()+" nombre="+competicion.getNombre()+" fecha="+competicion.getFecha());
 			listaCompeticiones.add(competicion);
 		}
 		return listaCompeticiones;
@@ -150,7 +152,15 @@ public class UserCompetitionDAO {
 	public boolean delUsuarioCompeticion(int id) throws SQLException {
 		preparedStatement = connect.prepareStatement(deleteUsuarioCompeticion);
 		preparedStatement.setInt(1, id);
-		preparedStatement.executeQuery();
+		preparedStatement.executeUpdate();
+		return true;
+	}
+	
+	public boolean delUsuarioCompeticion(int nlicencia, int competicionid) throws SQLException {
+		preparedStatement = connect.prepareStatement(deleteUsuarioCompeticionIds);
+		preparedStatement.setInt(1, nlicencia);
+		preparedStatement.setInt(2, competicionid);
+		preparedStatement.executeUpdate();
 		return true;
 	}
 	

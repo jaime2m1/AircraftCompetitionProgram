@@ -40,9 +40,9 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="inscribirse" layoutX="589.0" layoutY="161.0" mnemonicParsing="false" text="Inscribirse" />
+      <Button fx:id="inscribirse" layoutX="589.0" layoutY="161.0" mnemonicParsing="false" onAction="#inscribirse" text="Inscribirse" />
       <Label fx:id="loginUsuario" layoutX="53.0" layoutY="11.0" text="Usuario" />
-      <Button fx:id="desinscribirse" layoutX="575.0" layoutY="186.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Desinscribirse" />
+      <Button fx:id="desinscribirse" layoutX="575.0" layoutY="186.0" mnemonicParsing="false" onAction="#desinscribirse" prefHeight="25.0" prefWidth="99.0" text="Desinscribirse" />
       <Button fx:id="nuevaCompeticion" layoutX="356.0" layoutY="524.0" mnemonicParsing="false" onAction="#gotoNewCompetition" text="Nueva competición" AnchorPane.bottomAnchor="5.0" />
    </children>
 </AnchorPane>
