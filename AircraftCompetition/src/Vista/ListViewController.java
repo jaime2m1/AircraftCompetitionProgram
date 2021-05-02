@@ -59,6 +59,10 @@ public class ListViewController {
     private Button desinscribirse;
     @FXML
     private Button nuevaCompeticion;
+    @FXML
+    private Button añadirPuntuacion;
+    @FXML
+    private Button verClasificacion;
     
     private int nLicencia;
     private CompeticionModelo competicion;
@@ -77,6 +81,8 @@ public class ListViewController {
         inscribirse.setVisible(false);
         desinscribirse.setVisible(false);
         nuevaCompeticion.setVisible(false);
+        añadirPuntuacion.setVisible(false);
+        verClasificacion.setVisible(false);
         
         if(nLicencia==0) {
         	nuevaCompeticion.setVisible(true);
@@ -113,16 +119,19 @@ public class ListViewController {
 	private void showCompetitionDetails(CompeticionModelo competicion) {
         if (competicion != null) {
         	this.competicion=competicion;
-            competicionNombre.setText("Competici�n "+competicion.getNombre());
+            competicionNombre.setText("Competici�n "+competicion.getNombre());
             competicionFecha.setText("Fecha "+competicion.getFecha().toString());
             competicionNParticipantes.setText(competicion.getNParticipantesSTR()+" participantes");
+            verClasificacion.setVisible(true);
             if(!checkCompeticionUsuario(competicion)) {
             	inscribirse.setVisible(true);
             	desinscribirse.setVisible(false);
+            	añadirPuntuacion.setVisible(false);
             	}
             else {
             	inscribirse.setVisible(false);
             	desinscribirse.setVisible(true);
+            	añadirPuntuacion.setVisible(true);
             }
         } else {
         	competicionNombre.setText("");
@@ -154,7 +163,7 @@ public class ListViewController {
 			for(int i=0; i<competiciones.size(); i++) {
 				System.out.println("Id de competiciones "+competiciones.get(i).getId()+" = "+competicion.getId());
 				if(competiciones.get(i).getId()==competicion.getId()) {
-					System.out.println("Encontrado coincidencia de competici�n");
+					System.out.println("Encontrado coincidencia de competici�n");
 					encontrado=true;
 				}
 			}
@@ -198,13 +207,63 @@ public class ListViewController {
 			AnchorPane page = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Nueva Competici�n");
+			dialogStage.setTitle("Nueva Competicion");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(MainApp.getPrimaryStage());
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 
 			NewCompetitionController controller = loader.getController();
+
+			controller.setDialogStage(dialogStage);
+
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void gotoVerClasificacion(ActionEvent event) throws IOException {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("../Vista/ListParticipants.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Nueva Competici�n");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(MainApp.getPrimaryStage());
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			NewCompetitionController controller = loader.getController();
+
+			controller.setDialogStage(dialogStage);
+
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void gotoAnadirPuntuacion(ActionEvent event) throws IOException {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("../Vista/AnadirPuntuacion.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Nueva Competici�n");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(MainApp.getPrimaryStage());
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			AddPuntuacionController controller = loader.getController();
 
 			controller.setDialogStage(dialogStage);
 

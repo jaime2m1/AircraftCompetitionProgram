@@ -6,7 +6,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import Modelo.CompeticionModelo;
 import Modelo.UsuarioModelo;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -48,7 +51,7 @@ public class UserDAO {
 	private String getUsuario = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios WHERE nlicencia = ?";
 
 	/**
-	 * Constructor que obtiene la configuración del XML
+	 * Constructor que obtiene la configuraciï¿½n del XML
 	 */
 	public UserDAO() {
 		DBConfigDAO xmlDAO = new DBConfigDAO();
@@ -64,7 +67,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * Método que establece la conexión a la base de datos
+	 * Mï¿½todo que establece la conexiï¿½n a la base de datos
 	 * 
 	 * @return
 	 * @throws SQLException
@@ -78,7 +81,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * Método que devuelve un ArrayList de Usuarios
+	 * Mï¿½todo que devuelve un ArrayList de Usuarios
 	 * 
 	 * @return
 	 * @throws SQLException
@@ -97,9 +100,29 @@ public class UserDAO {
 		}
 		return listaUsuarios;
 	}
+	
+	/**
+	 * Mï¿½todo que devuelve todos los usuarios en formato ObservableList
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public ObservableList<UsuarioModelo> getAllUsuariosOL() throws SQLException {
+		ObservableList<UsuarioModelo> listaUsuariosOL = FXCollections.observableArrayList();
+		preparedStatement = connect.prepareStatement(getAllUsuarios);
+		resultSet = preparedStatement.executeQuery();
+		while (resultSet.next()) {
+			UsuarioModelo usuario = new UsuarioModelo();
+			usuario.setNombre(resultSet.getString("nombre"));
+			usuario.setApellidos(resultSet.getString("apellidos"));
+			usuario.setNlicencia(resultSet.getInt("nlicencia"));
+			listaUsuariosOL.add(usuario);
+		}
+		return listaUsuariosOL;
+	}
 
 	/**
-	 * Método que obtiene un usuario específico
+	 * Mï¿½todo que obtiene un usuario especï¿½fico
 	 * 
 	 * @param id
 	 * @return
@@ -113,7 +136,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * Método encargado de borrar un usuario específico
+	 * Mï¿½todo encargado de borrar un usuario especï¿½fico
 	 * 
 	 * @param id
 	 * @return
@@ -127,7 +150,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * Método encargado de añadir un usuario
+	 * Mï¿½todo encargado de aï¿½adir un usuario
 	 * 
 	 * @param usuario
 	 * @return
@@ -144,7 +167,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * Método encargado de modificar un usuario específico
+	 * Mï¿½todo encargado de modificar un usuario especï¿½fico
 	 * 
 	 * @param id
 	 * @param usuario

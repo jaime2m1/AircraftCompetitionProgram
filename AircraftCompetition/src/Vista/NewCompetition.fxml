@@ -8,18 +8,27 @@
 
 <AnchorPane prefHeight="150.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.NewCompetitionController">
    <children>
-      <Label layoutX="40.0" layoutY="12.0" text="Nombre" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="12.0" />
-      <Label layoutX="40.0" layoutY="65.0" text="Fecha" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="65.0" />
-      <TextField fx:id="nameLabel" layoutX="41.0" layoutY="28.0" />
-      <Button layoutX="334.0" layoutY="261.0" mnemonicParsing="false" onAction="#newCompetition" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Button layoutX="7.0" layoutY="117.0" mnemonicParsing="false" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
          <graphic>
-            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../resources/images/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="63.0" layoutY="14.0" text="Nombre" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="16.0" />
+      <Label layoutX="63.0" layoutY="67.0" text="Fecha" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="67.0" />
+      <TextField fx:id="nameLabel" layoutX="63.0" layoutY="33.0" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="33.0" />
+      <Button layoutX="334.0" layoutY="261.0" mnemonicParsing="false" onAction="#newCompetition" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
                <image>
                   <Image url="@../../resources/images/save.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <DatePicker fx:id="dateLabel" layoutX="41.0" layoutY="87.0" />
+      <DatePicker fx:id="dateLabel" layoutX="63.0" layoutY="82.0" />
    </children>
 </AnchorPane>

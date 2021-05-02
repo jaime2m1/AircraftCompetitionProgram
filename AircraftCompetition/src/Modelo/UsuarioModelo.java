@@ -10,17 +10,22 @@ public class UsuarioModelo {
 	private String apellidos;
 	private int nlicencia;
 	private String contrasena;
+	private int puesto;
+	private double puntuacion;
 
 	public UsuarioModelo() {
 
 	}
 
-	public UsuarioModelo(String nombre, String apellidos, int nlicencia, String contrasena) {
+	public UsuarioModelo(String nombre, String apellidos, int nlicencia, String contrasena, int puesto, double puntuacion) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.nlicencia = nlicencia;
 		this.contrasena = contrasena;
+		this.puesto = puesto;
+		this.puntuacion = puntuacion;
+		
 	}
 
 	public String getNombre() {
@@ -39,6 +44,14 @@ public class UsuarioModelo {
 		return contrasena;
 	}
 
+	public int getPuesto() {
+		return puesto;
+	}
+
+	public double getPuntuacion() {
+		return puntuacion;
+	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -54,5 +67,14 @@ public class UsuarioModelo {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
+	
+	public void setPuesto(int puesto) {
+		this.puesto = puesto;
+	}
+
+	public void setPuntuacion(double puntuacion) {
+		this.puntuacion = puntuacion;
+	}
+
 
 }
