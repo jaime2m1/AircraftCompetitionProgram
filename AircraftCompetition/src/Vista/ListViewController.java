@@ -3,6 +3,9 @@ package Vista;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -119,7 +122,9 @@ public class ListViewController {
 	private void showCompetitionDetails(CompeticionModelo competicion) {
         if (competicion != null) {
         	this.competicion=competicion;
-            competicionNombre.setText("Competici�n "+competicion.getNombre());
+        	Date today = new Date();
+        	
+            competicionNombre.setText("Competicion "+competicion.getNombre());
             competicionFecha.setText("Fecha "+competicion.getFecha().toString());
             competicionNParticipantes.setText(competicion.getNParticipantesSTR()+" participantes");
             verClasificacion.setVisible(true);
@@ -131,7 +136,18 @@ public class ListViewController {
             else {
             	inscribirse.setVisible(false);
             	desinscribirse.setVisible(true);
-            	anadirPuntuacion.setVisible(true);
+            	
+            	if(nLicencia==0) {
+            		anadirPuntuacion.setVisible(false);
+                }else {
+                	anadirPuntuacion.setVisible(true);
+                }
+            }
+            
+            if((competicion.getFecha().getTime() - 1728000000) > today.getTime() || today.getTime() > competicion.getFecha().getTime()) {
+            	inscribirse.setVisible(false);
+                desinscribirse.setVisible(false);
+                anadirPuntuacion.setVisible(false);
             }
         } else {
         	competicionNombre.setText("");
@@ -163,7 +179,7 @@ public class ListViewController {
 			for(int i=0; i<competiciones.size(); i++) {
 				System.out.println("Id de competiciones "+competiciones.get(i).getId()+" = "+competicion.getId());
 				if(competiciones.get(i).getId()==competicion.getId()) {
-					System.out.println("Encontrado coincidencia de competici�n");
+					System.out.println("Encontrado coincidencia de competicion");
 					encontrado=true;
 				}
 			}
@@ -227,22 +243,16 @@ public class ListViewController {
 	
 	public void gotoVerClasificacion(ActionEvent event) throws IOException {
 		try {
+			Stage primaryStage = MainApp.getPrimaryStage();
 			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("../Vista/RootLayoutCompetition.fxml"));
 			loader.setLocation(MainApp.class.getResource("../Vista/ListParticipants.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
+			AnchorPane rootLayout = (AnchorPane) loader.load();
+			Scene scene = new Scene(rootLayout);
+			primaryStage.setScene(scene);
+			primaryStage.centerOnScreen();
 
-			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Nueva Competici�n");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initOwner(MainApp.getPrimaryStage());
-			Scene scene = new Scene(page);
-			dialogStage.setScene(scene);
-
-			/*ViewClasificacionController controller = loader.getController();
-
-			controller.setDialogStage(dialogStage);
-
-			dialogStage.showAndWait();*/
+			primaryStage.show();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

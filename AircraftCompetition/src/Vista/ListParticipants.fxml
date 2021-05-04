@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.ListParticipantsController">
    <children>
-      <Label text="Usuario" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="10.0" />
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <Label fx:id="loginUsuario" text="Usuario" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="10.0" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#gotoPantallaPrincipal" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
                <image>
@@ -20,12 +20,21 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="40.0">
+      <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#setTableData" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="5.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../resources/images/update.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TableView fx:id="participantsTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="40.0">
         <columns>
-          <TableColumn prefWidth="86.25" text="Puesto" />
-          <TableColumn prefWidth="86.25" text="Nombre" />
-            <TableColumn prefWidth="86.25" text="Nº Licencia" />
-            <TableColumn prefWidth="86.25" text="Puntuación" />
+          <TableColumn fx:id="puesto" prefWidth="86.25" text="Puesto" />
+          <TableColumn fx:id="nombre" prefWidth="86.25" text="Nombre" />
+            <TableColumn fx:id="licencia" prefWidth="86.25" text="Nº Licencia" />
+            <TableColumn fx:id="puntuacion" prefWidth="86.25" text="Puntuación" />
         </columns>
       </TableView>
       <AnchorPane layoutX="362.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="365.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0">

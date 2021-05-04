@@ -48,6 +48,8 @@ public class UserDAO {
 	private String deleteUsuario = "DELETE FROM Usuarios WHERE nlicencia = ?";
 	private String updateUsuario = "UPDATE Usuarios SET nombre = ?, apellidos = ?, contrasena = ? WHERE nlicencia = ?";
 	private String getAllUsuarios = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios";
+	private String getAllUsuariosOrdered = "";
+	private String getPuntuacion = "SELECT usuarioid, tiempo, distancia, altura FROM Puntuacion";
 	private String getUsuario = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios WHERE nlicencia = ?";
 
 	/**
@@ -113,9 +115,11 @@ public class UserDAO {
 		resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
 			UsuarioModelo usuario = new UsuarioModelo();
+			usuario.setPuesto(0);
 			usuario.setNombre(resultSet.getString("nombre"));
 			usuario.setApellidos(resultSet.getString("apellidos"));
 			usuario.setNlicencia(resultSet.getInt("nlicencia"));
+			usuario.setPuntuacion(0);
 			listaUsuariosOL.add(usuario);
 		}
 		return listaUsuariosOL;

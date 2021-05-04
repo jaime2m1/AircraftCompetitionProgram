@@ -66,7 +66,7 @@ public class ListParticipantsController {
     private Label participantePuntuacionAltura;
     
     @FXML
-    private Button añadirPuntuacion;
+    private Button anadirPuntuacion;
     
     private int nLicencia;
     private UsuarioModelo participante;
@@ -86,7 +86,6 @@ public class ListParticipantsController {
     	participantePuntuacionTiempo.setText("");
     	participantePuntuacionDistancia.setText("");
     	participantePuntuacionAltura.setText("");
-        añadirPuntuacion.setVisible(false);
         
     }
     
@@ -174,28 +173,24 @@ public class ListParticipantsController {
 	}
 	
 	@FXML
-	public void gotoNewCompetition(ActionEvent event) throws IOException {
+	public void gotoPantallaPrincipal(ActionEvent event) throws IOException {
 		try {
+			Stage primaryStage = MainApp.getPrimaryStage();
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("../Vista/NewCompetition.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
+			loader.setLocation(MainApp.class.getResource("../Vista/RootLayoutCompetition.fxml"));
+			loader.setLocation(MainApp.class.getResource("../Vista/ListView.fxml"));
+			AnchorPane rootLayout = (AnchorPane) loader.load();
+			Scene scene = new Scene(rootLayout);
+			primaryStage.setScene(scene);
+			primaryStage.centerOnScreen();
 
-			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Nueva Competici�n");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initOwner(MainApp.getPrimaryStage());
-			Scene scene = new Scene(page);
-			dialogStage.setScene(scene);
-
-			NewCompetitionController controller = loader.getController();
-
-			controller.setDialogStage(dialogStage);
-
-			dialogStage.showAndWait();
+			primaryStage.show();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	
 }

@@ -10,11 +10,21 @@ public class UsuarioModelo {
 	private String apellidos;
 	private int nlicencia;
 	private String contrasena;
-	private int puesto;
-	private double puntuacion;
+	private int puesto = 0;
+	private double puntuacion = 0;
 
 	public UsuarioModelo() {
 
+	}
+	
+	public UsuarioModelo(String nombre, String apellidos, int nlicencia, String contrasena) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.nlicencia = nlicencia;
+		this.contrasena = contrasena;
+		this.puesto = 0;
+		this.puntuacion = 0;
 	}
 
 	public UsuarioModelo(String nombre, String apellidos, int nlicencia, String contrasena, int puesto, double puntuacion) {
