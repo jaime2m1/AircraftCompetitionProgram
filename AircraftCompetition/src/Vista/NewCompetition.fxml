@@ -8,15 +8,6 @@
 
 <AnchorPane prefHeight="150.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.NewCompetitionController">
    <children>
-      <Button layoutX="7.0" layoutY="117.0" mnemonicParsing="false" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../../resources/images/back.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
       <Label layoutX="63.0" layoutY="14.0" text="Nombre" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="16.0" />
       <Label layoutX="63.0" layoutY="67.0" text="Fecha" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="67.0" />
       <TextField fx:id="nameLabel" layoutX="63.0" layoutY="33.0" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="33.0" />

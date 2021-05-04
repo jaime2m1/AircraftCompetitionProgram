@@ -42,7 +42,7 @@ public class LoginController {
 	private TextField contrasenaLabel;
 
 	/**
-	 * Establecemos conexión con la base de datos
+	 * Establecemos conexiï¿½n con la base de datos
 	 */
 	@FXML
 	private void initialize() {
@@ -55,7 +55,7 @@ public class LoginController {
 	}
 
 	/**
-	 * Volvemos atrás al LoginCreateView
+	 * Volvemos atrï¿½s al LoginCreateView
 	 * 
 	 * @param event
 	 * @throws IOException
@@ -70,7 +70,7 @@ public class LoginController {
 	}
 
 	/**
-	 * Comprobamos el inicio de sesión
+	 * Comprobamos el inicio de sesiï¿½n
 	 * 
 	 * @param event
 	 * @throws IOException
@@ -95,11 +95,11 @@ public class LoginController {
 			}
 			if (encontrado) {
 				login();
-				System.out.println("Inicio Sesión");
+				System.out.println("Inicio Sesion");
 			} else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error");
-				alert.setContentText("Error iniciando sesión");
+				alert.setContentText("Error iniciando sesion");
 				alert.showAndWait();
 				System.out.println("El usuario no existe");
 			}

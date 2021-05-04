@@ -29,8 +29,8 @@
             <Button fx:id="inscribirse" layoutX="406.0" layoutY="398.0" mnemonicParsing="false" onAction="#inscribirse" text="Inscribirse" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
             <Button fx:id="desinscribirse" layoutX="406.0" layoutY="450.0" mnemonicParsing="false" onAction="#desinscribirse" prefHeight="25.0" prefWidth="99.0" text="Desinscribirse" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
             <Button fx:id="nuevaCompeticion" mnemonicParsing="false" onAction="#gotoNewCompetition" text="Nueva competición" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" />
-            <Button fx:id="añadirPuntuacion" mnemonicParsing="false" text="Añadir puntuación" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" />
-            <Button fx:id="verClasificacion" mnemonicParsing="false" text="Ver clasificación" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="214.5" AnchorPane.rightAnchor="214.5" />
+            <Button fx:id="anadirPuntuacion" mnemonicParsing="false" onAction="#gotoAnadirPuntuacion" text="Añadir puntuación" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" />
+            <Button fx:id="verClasificacion" mnemonicParsing="false" onAction="#gotoVerClasificacion" text="Ver clasificación" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="214.5" AnchorPane.rightAnchor="214.5" />
          </children>
       </AnchorPane>
       <TableView fx:id="competitionTable" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="40.0">

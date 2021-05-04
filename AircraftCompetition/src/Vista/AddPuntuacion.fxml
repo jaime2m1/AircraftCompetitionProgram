@@ -6,18 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="280.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="280.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.AddPuntuacionController">
    <children>
-      <Button mnemonicParsing="false" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../resources/images/back.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
       <Label layoutX="76.0" layoutY="19.0" text="Tiempo de vuelo" AnchorPane.topAnchor="40.0" />
       <TextField fx:id="tiempoLabel" layoutX="76.0" layoutY="57.0" AnchorPane.leftAnchor="75.5" AnchorPane.rightAnchor="75.5" AnchorPane.topAnchor="57.0" />
       <Label layoutX="76.0" layoutY="67.0" text="Distancia de aterrizaje" AnchorPane.topAnchor="100.0" />

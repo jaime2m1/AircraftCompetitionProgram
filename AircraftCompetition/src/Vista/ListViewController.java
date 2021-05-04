@@ -60,7 +60,7 @@ public class ListViewController {
     @FXML
     private Button nuevaCompeticion;
     @FXML
-    private Button añadirPuntuacion;
+    private Button anadirPuntuacion;
     @FXML
     private Button verClasificacion;
     
@@ -81,7 +81,7 @@ public class ListViewController {
         inscribirse.setVisible(false);
         desinscribirse.setVisible(false);
         nuevaCompeticion.setVisible(false);
-        añadirPuntuacion.setVisible(false);
+        anadirPuntuacion.setVisible(false);
         verClasificacion.setVisible(false);
         
         if(nLicencia==0) {
@@ -126,12 +126,12 @@ public class ListViewController {
             if(!checkCompeticionUsuario(competicion)) {
             	inscribirse.setVisible(true);
             	desinscribirse.setVisible(false);
-            	añadirPuntuacion.setVisible(false);
+            	anadirPuntuacion.setVisible(false);
             	}
             else {
             	inscribirse.setVisible(false);
             	desinscribirse.setVisible(true);
-            	añadirPuntuacion.setVisible(true);
+            	anadirPuntuacion.setVisible(true);
             }
         } else {
         	competicionNombre.setText("");
@@ -238,11 +238,11 @@ public class ListViewController {
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 
-			NewCompetitionController controller = loader.getController();
+			/*ViewClasificacionController controller = loader.getController();
 
 			controller.setDialogStage(dialogStage);
 
-			dialogStage.showAndWait();
+			dialogStage.showAndWait();*/
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -253,11 +253,11 @@ public class ListViewController {
 	public void gotoAnadirPuntuacion(ActionEvent event) throws IOException {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("../Vista/AnadirPuntuacion.fxml"));
+			loader.setLocation(MainApp.class.getResource("../Vista/AddPuntuacion.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Nueva Competici�n");
+			dialogStage.setTitle("Añadir puntuacion");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(MainApp.getPrimaryStage());
 			Scene scene = new Scene(page);

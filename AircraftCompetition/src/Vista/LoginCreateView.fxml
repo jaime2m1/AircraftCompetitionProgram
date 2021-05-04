@@ -15,7 +15,7 @@
             <Image url="@../../resources/images/plane.png" />
          </image>
       </ImageView>
-      <Button layoutX="6.0" mnemonicParsing="false" onAction="#gotoConfigDatabase" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Button layoutX="6.0" mnemonicParsing="false" onAction="#gotoConfigDatabase" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -6,21 +6,30 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.DBConfigController">
+<AnchorPane prefHeight="330.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.DBConfigController">
    <children>
-      <Label layoutX="41.0" layoutY="30.0" text="Host" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="30.0" />
-      <Label layoutX="40.0" layoutY="57.0" text="Database" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="80.0" />
-      <Label layoutX="33.0" layoutY="133.0" text="Usuario" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="130.0" />
-      <Label layoutX="36.0" layoutY="191.0" text="Contraseña" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="180.0" />
-      <TextField fx:id="hostLabel" layoutX="41.0" layoutY="47.0" />
-      <TextField fx:id="databaseLabel" layoutX="41.0" layoutY="97.0" />
-      <TextField fx:id="userLabel" layoutX="41.0" layoutY="147.0" />
-      <TextField fx:id="passwordLabel" layoutX="41.0" layoutY="197.0" />
-      <Button layoutX="334.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleSave" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Label layoutX="75.0" layoutY="19.0" text="Host" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="40.0" />
+      <Label layoutX="75.0" layoutY="83.0" text="Database" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="100.0" />
+      <Label layoutX="75.0" layoutY="133.0" text="Usuario" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="160.0" />
+      <Label layoutX="75.0" layoutY="183.0" text="Contraseña" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="220.0" />
+      <TextField fx:id="hostLabel" layoutX="76.0" layoutY="57.0" AnchorPane.leftAnchor="75.5" AnchorPane.rightAnchor="75.5" />
+      <TextField fx:id="databaseLabel" layoutX="76.0" layoutY="117.0" AnchorPane.leftAnchor="75.5" />
+      <TextField fx:id="userLabel" layoutX="76.0" layoutY="177.0" AnchorPane.leftAnchor="75.5" />
+      <TextField fx:id="passwordLabel" layoutX="76.0" layoutY="237.0" AnchorPane.leftAnchor="75.5" />
+      <Button layoutX="334.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleSave" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <graphic>
-            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
                <image>
                   <Image url="@../../resources/images/save.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button mnemonicParsing="false" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../resources/images/back.png" />
                </image>
             </ImageView>
          </graphic>
