@@ -66,7 +66,7 @@ public class ListParticipantsController {
     private Label participantePuntuacionAltura;
     
     @FXML
-    private Button añadirPuntuacion;
+    private Button anadirPuntuacion;
     
     private int nLicencia;
     private UsuarioModelo participante;
@@ -86,7 +86,7 @@ public class ListParticipantsController {
     	participantePuntuacionTiempo.setText("");
     	participantePuntuacionDistancia.setText("");
     	participantePuntuacionAltura.setText("");
-        añadirPuntuacion.setVisible(false);
+        anadirPuntuacion.setVisible(false);
         
     }
     
