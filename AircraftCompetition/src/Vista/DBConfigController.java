@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 /**
  * @author Jaime,Pablo,Juan
  * 
- *         Clase controlador de la ventana dialogo de la configuración XML de la
+ *         Clase controlador de la ventana dialogo de la configuraciï¿½n XML de la
  *         base de datos
  */
 public class DBConfigController {
@@ -61,7 +61,7 @@ public class DBConfigController {
 	}
 
 	/**
-	 * Chequeamos si la entrada del usuario es válida
+	 * Chequeamos si la entrada del usuario es vï¿½lida
 	 * 
 	 * @return
 	 */

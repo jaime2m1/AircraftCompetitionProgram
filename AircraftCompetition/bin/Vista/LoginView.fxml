@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.LoginController">
+   <children>
+      <TextField fx:id="nlicenciaLabel" layoutX="76.0" layoutY="149.0" />
+      <TextField fx:id="contrasenaLabel" layoutX="76.0" layoutY="200.0" />
+      <Label layoutX="76.0" layoutY="132.0" text="Número de licencia" />
+      <Label layoutX="76.0" layoutY="183.0" text="Contraseña" />
+      <Button layoutX="108.0" layoutY="261.0" mnemonicParsing="false" onAction="#loginUser" text="Iniciar sesión" AnchorPane.bottomAnchor="60.0" />
+      <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="126.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/images/plane.png" />
+         </image>
+      </ImageView>
+      <Button mnemonicParsing="false" onAction="#gotoLoginCreate" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../resources/images/back.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+   </children>
+</AnchorPane>
