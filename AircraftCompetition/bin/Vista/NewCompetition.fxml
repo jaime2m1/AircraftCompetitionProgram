@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="150.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.NewCompetitionController">
+   <children>
+      <Label layoutX="63.0" layoutY="14.0" text="Nombre" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="16.0" />
+      <Label layoutX="63.0" layoutY="67.0" text="Fecha" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="67.0" />
+      <TextField fx:id="nameLabel" layoutX="63.0" layoutY="33.0" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="33.0" />
+      <Button layoutX="334.0" layoutY="261.0" mnemonicParsing="false" onAction="#newCompetition" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../resources/images/save.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <DatePicker fx:id="dateLabel" layoutX="63.0" layoutY="82.0" />
+   </children>
+</AnchorPane>

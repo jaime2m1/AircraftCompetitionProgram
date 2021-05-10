@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.RegisterController">
+   <children>
+      <TextField fx:id="nombreLabel" layoutX="76.0" layoutY="57.0" AnchorPane.leftAnchor="75.5" AnchorPane.rightAnchor="75.5" AnchorPane.topAnchor="57.0" />
+      <TextField fx:id="apellidosLabel" layoutX="76.0" layoutY="117.0" AnchorPane.leftAnchor="75.5" AnchorPane.rightAnchor="75.5" />
+      <TextField fx:id="nlicenciaLabel" layoutX="76.0" layoutY="177.0" AnchorPane.leftAnchor="75.5" AnchorPane.rightAnchor="75.5" />
+      <PasswordField fx:id="contrasenaLabel" layoutX="76.0" layoutY="237.0" AnchorPane.bottomAnchor="138.0" AnchorPane.leftAnchor="75.5" AnchorPane.rightAnchor="75.5" />
+      <PasswordField fx:id="repcontrasenaLabel" layoutX="76.0" layoutY="297.0" AnchorPane.leftAnchor="75.5" AnchorPane.rightAnchor="75.5" />
+      <Label layoutX="76.0" layoutY="40.0" text="Nombre" AnchorPane.topAnchor="40.0" />
+      <Label layoutX="76.0" layoutY="147.0" text="Nº licencia" AnchorPane.topAnchor="160.0" />
+      <Label layoutX="76.0" layoutY="97.0" text="Apellidos" AnchorPane.topAnchor="100.0" />
+      <Label layoutX="76.0" layoutY="201.0" text="Contraseña" AnchorPane.topAnchor="220.0" />
+      <Label layoutX="75.0" layoutY="247.0" text="Repetir contraseña" AnchorPane.topAnchor="280.0" />
+      <Button layoutX="113.0" layoutY="334.0" mnemonicParsing="false" onAction="#registerUser" text="Registrarse" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="112.5" AnchorPane.rightAnchor="112.5" />
+      <Button mnemonicParsing="false" onAction="#gotoLoginCreate" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/images/back.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+   </children>
+</AnchorPane>
