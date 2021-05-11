@@ -144,6 +144,8 @@ public class ListViewController {
                 }
             }
             
+            //Chequea si se esta en el plazo de 20 dias para inscribirse
+            
             if((competicion.getFecha().getTime() - 1728000000) > today.getTime() || today.getTime() > competicion.getFecha().getTime()) {
             	inscribirse.setVisible(false);
                 desinscribirse.setVisible(false);

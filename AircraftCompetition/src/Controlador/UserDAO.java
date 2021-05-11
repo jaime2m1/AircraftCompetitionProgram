@@ -49,7 +49,7 @@ public class UserDAO {
 	private String updateUsuario = "UPDATE Usuarios SET nombre = ?, apellidos = ?, contrasena = ? WHERE nlicencia = ?";
 	private String getAllUsuarios = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios";
 	private String getAllUsuariosOrdered = "";
-	private String getPuntuacion = "SELECT usuarioid, tiempo, distancia, altura FROM Puntuacion";
+	private String getPuntuacionesUsuario = "SELECT usuarioid, tiempo, distancia, altura FROM Puntuacion WHERE usuarioid = ?";
 	private String getUsuario = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios WHERE nlicencia = ?";
 
 	/**
@@ -186,5 +186,51 @@ public class UserDAO {
 		preparedStatement.setInt(4, id);
 		preparedStatement.executeUpdate();
 		return true;
+	}
+	
+	public ArrayList<Integer> getPuntuacionesUsuario(int id) throws SQLException{
+		ArrayList<Integer> puntuaciones = new ArrayList<Integer>();
+		Integer total = 0;
+		preparedStatement = connect.prepareStatement(getPuntuacionesUsuario);
+		resultSet = preparedStatement.executeQuery();
+		
+		puntuaciones.add(resultSet.getInt("tiempo"));
+		puntuaciones.add(resultSet.getInt("distancia"));
+		puntuaciones.add(resultSet.getInt("altura"));
+		
+		total += puntuaciones.get(0);
+		
+		switch(puntuaciones.get(1)){
+			case 0:
+				total += 50;
+				break;
+			case 1:
+				total += 45;
+				break;
+			case 2:
+				total += 40;
+				break;
+			case 3: case 4:
+				total += 35;
+				break;
+			case 5: case 6: case 7: case 8: case 9:
+				total += 30;
+				break;
+			default:
+				total += 0;
+				break;
+		}
+		
+		if(puntuaciones.get(2) <= 200) {
+			total -= (puntuaciones.get(2)/2);
+		}else {
+			total -= 100;
+			total -= ((puntuaciones.get(2) - 200) * 3);
+		}
+
+		puntuaciones.add(0, total);
+		
+		return puntuaciones;
+		
 	}
 }
