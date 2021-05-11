@@ -31,6 +31,7 @@
             <Button fx:id="nuevaCompeticion" mnemonicParsing="false" onAction="#gotoNewCompetition" text="Nueva competición" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" />
             <Button fx:id="anadirPuntuacion" mnemonicParsing="false" onAction="#gotoAnadirPuntuacion" text="Añadir puntuación" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" />
             <Button fx:id="verClasificacion" mnemonicParsing="false" onAction="#gotoVerClasificacion" text="Ver clasificación" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="214.5" AnchorPane.rightAnchor="214.5" />
+            <Button fx:id="borrarCompeticion" layoutX="407.0" layoutY="475.0" mnemonicParsing="false" onAction="#deleteCompetition" text="Borrar competición" />
          </children>
       </AnchorPane>
       <TableView fx:id="competitionTable" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="40.0">

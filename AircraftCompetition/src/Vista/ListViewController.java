@@ -63,6 +63,8 @@ public class ListViewController {
     @FXML
     private Button nuevaCompeticion;
     @FXML
+    private Button borrarCompeticion;
+    @FXML
     private Button anadirPuntuacion;
     @FXML
     private Button verClasificacion;
@@ -84,11 +86,13 @@ public class ListViewController {
         inscribirse.setVisible(false);
         desinscribirse.setVisible(false);
         nuevaCompeticion.setVisible(false);
+        borrarCompeticion.setVisible(false);
         anadirPuntuacion.setVisible(false);
         verClasificacion.setVisible(false);
         
         if(nLicencia==0) {
         	nuevaCompeticion.setVisible(true);
+        	borrarCompeticion.setVisible(true);
         }
     }
     
@@ -119,6 +123,10 @@ public class ListViewController {
 			e.printStackTrace();
 		}
     }
+	/**
+	 * Mostramos los datos de la competición seleccionada
+	 * @param competicion
+	 */
 	private void showCompetitionDetails(CompeticionModelo competicion) {
         if (competicion != null) {
         	this.competicion=competicion;
@@ -159,6 +167,9 @@ public class ListViewController {
         }
     }
 	
+	/**
+	 * Obtenemos el usuario con el que se ha logeado
+	 */
 	private void setLoginUsuario() {
 		DBConfigDAO dao = new DBConfigDAO();
 		try {
@@ -169,6 +180,11 @@ public class ListViewController {
 		}
 	}
 	
+	/**
+	 * Chequeamos que el usuario esté inscrito en la competición seleccionada
+	 * @param competicion
+	 * @return
+	 */
 	private boolean checkCompeticionUsuario(CompeticionModelo competicion) {
 		UserCompetitionDAO dao = new UserCompetitionDAO();
 		ArrayList<CompeticionModelo> competiciones;
@@ -192,6 +208,11 @@ public class ListViewController {
 		return encontrado;
 	}
 	
+	/**
+	 * Inscribimos al usuario en la competición
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void inscribirse(ActionEvent event) throws IOException {
 		UserCompetitionDAO dao = new UserCompetitionDAO();
@@ -204,6 +225,11 @@ public class ListViewController {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Desinscribimos al usuario
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void desinscribirse(ActionEvent event) throws IOException {
 		UserCompetitionDAO dao = new UserCompetitionDAO();
@@ -217,6 +243,11 @@ public class ListViewController {
 		}
 	}
 	
+	/**
+	 * Abrimos la ventana para crear una nueva competición
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void gotoNewCompetition(ActionEvent event) throws IOException {
 		try {
@@ -243,6 +274,38 @@ public class ListViewController {
 		}
 	}
 	
+	/**
+	 * Borramos una competición y todas las relaciones con los usuarios
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	public void deleteCompetition(ActionEvent event) throws IOException {
+		CompetitionDAO daoCompe = new CompetitionDAO();
+		try {
+			daoCompe.connectDB();
+			daoCompe.delCompeticion(this.competicion.getId());
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		UserCompetitionDAO daoUserCompe = new UserCompetitionDAO();
+		try {
+			daoUserCompe.connectDB();
+			daoUserCompe.delUsuarioCompeticion(this.competicion.getId());
+		} catch (SQLException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * Vamos a la ventana para ver la clasificación
+	 * @param event
+	 * @throws IOException
+	 */
 	public void gotoVerClasificacion(ActionEvent event) throws IOException {
 		try {
 			Stage primaryStage = MainApp.getPrimaryStage();
@@ -262,6 +325,11 @@ public class ListViewController {
 		}
 	}
 	
+	/**
+	 * Vamos a anadir la puntuación
+	 * @param event
+	 * @throws IOException
+	 */
 	public void gotoAnadirPuntuacion(ActionEvent event) throws IOException {
 		try {
 			FXMLLoader loader = new FXMLLoader();

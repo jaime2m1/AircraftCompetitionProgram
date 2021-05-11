@@ -36,7 +36,7 @@ public class UserCompetitionDAO {
 	private String passwd = "Competition";
 	
 	private String insertUsuarioCompeticion = "INSERT INTO UsuarioCompeticion (usuarioid, competicionid) VALUES(?, ?)";
-	private String deleteUsuarioCompeticion = "DELETE FROM UsuarioCompeticion WHERE id = ?";
+	private String deleteUsuarioCompeticion = "DELETE FROM UsuarioCompeticion WHERE competicionid = ?";
 	private String deleteUsuarioCompeticionIds = "DELETE FROM UsuarioCompeticion WHERE usuarioid = ? and competicionid = ?";
 	private String getUsuariosDeCompeticion = "SELECT u.nombre, u.apellidos, u.nlicencia, u.contrasena "
 			+ "FROM Usuarios u "
@@ -163,6 +163,7 @@ public class UserCompetitionDAO {
 		preparedStatement.executeUpdate();
 		return true;
 	}
+	
 	
 	
 }
