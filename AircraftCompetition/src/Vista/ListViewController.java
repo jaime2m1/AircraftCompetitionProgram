@@ -3,9 +3,7 @@ package Vista;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.xml.parsers.ParserConfigurationException;
 

@@ -48,6 +48,7 @@ public class AddPuntuacionController {
 	private TextField alturaLabel;
 	
 	private int nLicencia;
+	private CompeticionModelo competicion;
 	
 	@FXML
     public void initialize() {
@@ -114,6 +115,10 @@ public class AddPuntuacionController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void setCompeticion(CompeticionModelo competicion) {
+		this.competicion = competicion;
 	}
 
 }
