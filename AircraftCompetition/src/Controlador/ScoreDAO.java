@@ -32,6 +32,7 @@ public class ScoreDAO {
 	private String deletePuntuacionUsuario = "DELETE FROM Competicion WHERE usuarioid = ?";
 	//private String updateCompeticion = "UPDATE Competicion SET nombre = ?, fecha = ? WHERE id = ?";
 	private String getAllPuntuaciones = "SELECT p.id, u.nlicencia, u.nombre, u.apellidos, u.contrasena, p.tiempo, p.distancia, p.altura, p.penalizacion FROM Puntuacion p INNER JOIN Usuarios u ON p.usuarioid = u.nlicencia";
+	private String getLastPuntuacionId = "SELECT MAX(id) FROM Puntuacion";
 	//private String getCompeticion = "SELECT id, nombre, fecha FROM Competicion WHERE nlicencia = ?";
 	
 	public ScoreDAO() {
@@ -68,6 +69,12 @@ public class ScoreDAO {
 			listaPuntuaciones.add(puntuacion);
 		}
 		return listaPuntuaciones;
+	}
+	
+	public int getLastPuntuacionId() throws SQLException {
+		preparedStatement = connect.prepareStatement(getLastPuntuacionId);
+		resultSet = preparedStatement.executeQuery();
+		return resultSet.getInt("id");
 	}
 	
 	public boolean addPuntuacion(PuntuacionModelo puntuacion) throws SQLException {

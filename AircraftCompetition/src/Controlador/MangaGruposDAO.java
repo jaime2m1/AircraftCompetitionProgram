@@ -1,5 +1,11 @@
 package Controlador;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -7,31 +13,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import Modelo.CompeticionModelo;
+import Modelo.GrupoModelo;
+import Modelo.MangaModelo;
+import Modelo.PuntuacionModelo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-/**
- * @author Jaime,Pablo,Juan
- * 
- *         Esta clase es el dao del {@link Modelo.CompeticionModelo} 
- *         Con las funciones de: 
- *         {@link #connectDB()} 
- *         {@link #getAllCompeticiones()}
- *         {@link #getAllCompeticionesOL()} 
- *         {@link #getCompeticion()}
- *         {@link #delCompeticion()} 
- *         {@link #addCompeticion()}
- *         {@link #modCompeticion()}
- */
-public class CompetitionDAO {
-
+public class MangaGruposDAO {
 	public ArrayList<CompeticionModelo> listaUsuarios = new ArrayList<CompeticionModelo>();
 
 	private Connection connect = null;
@@ -44,18 +32,18 @@ public class CompetitionDAO {
 	private String user = "Aircraft";
 	private String passwd = "Competition";
 
-	private String insertCompeticion = "INSERT INTO Competicion (nombre, fecha) VALUES(?, ?)";
+	private String insertManga = "INSERT INTO Manga (competicionid, nmanga) VALUES(?, ?)";
+	private String insertGrupo = "INSERT INTO Grupo (mangaid, puntuacionid, ngrupo) VALUES(?, ?, ?)";
 	private String deleteCompeticion = "DELETE FROM Competicion WHERE id = ?";
 	private String updateCompeticion = "UPDATE Competicion SET nombre = ?, fecha = ? WHERE id = ?";
 	private String getAllCompeticiones = "SELECT id, nombre, fecha FROM Competicion";
 	private String getCompeticion = "SELECT id, nombre, fecha FROM Competicion WHERE nlicencia = ?";
-	private String getLastCompeticionID = "SELECT MAX(id) id FROM Competicion";
-	
+	private String getMangaCompeticion = "SELECT id, competicionid, nmanga FROM Manga WHERE competicionid = ? and nmanga = ?";
 
 	/**
 	 * Constructor del DAO que usa la configuración del XML
 	 */
-	public CompetitionDAO() {
+	public MangaGruposDAO() {
 		DBConfigDAO xmlDAO = new DBConfigDAO();
 		try {
 			String[] DBConfig = xmlDAO.readDBConfig();
@@ -82,6 +70,21 @@ public class CompetitionDAO {
 				.getConnection("jdbc:mysql://" + host + "/" + database + "?" + "user=" + user + "&password=" + passwd);
 		return true;
 	}
+	
+	public boolean createMangas(CompeticionModelo competicion) throws SQLException {
+		for(int i=1; i<=6; i++) {
+			MangaModelo manga = new MangaModelo(i, competicion);
+			addManga(manga);
+		}
+		return true;
+	}
+	public boolean createGrupos(MangaModelo manga, PuntuacionModelo puntuacion) throws SQLException {
+		for(int i=1; i<=2; i++) {
+			GrupoModelo grupo = new GrupoModelo(manga, puntuacion, i);
+			addGrupo(grupo);
+		}
+		return true;
+	}
 
 	/**
 	 * Método que devuelve todas las competiciones en formato ArrayList
@@ -89,7 +92,7 @@ public class CompetitionDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<CompeticionModelo> getAllCompeticiones() throws SQLException {
+	public ArrayList<CompeticionModelo> getAllMangas() throws SQLException {
 		listaUsuarios.clear();
 		preparedStatement = connect.prepareStatement(getAllCompeticiones);
 		resultSet = preparedStatement.executeQuery();
@@ -146,7 +149,7 @@ public class CompetitionDAO {
 	public boolean delCompeticion(int id) throws SQLException {
 		preparedStatement = connect.prepareStatement(deleteCompeticion);
 		preparedStatement.setInt(1, id);
-		preparedStatement.executeUpdate();
+		preparedStatement.executeQuery();
 		return true;
 	}
 
@@ -157,32 +160,21 @@ public class CompetitionDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public boolean addCompeticion(CompeticionModelo competicion) throws SQLException {
-		preparedStatement = connect.prepareStatement(insertCompeticion);
-		preparedStatement.setString(1, competicion.getNombre());
-		preparedStatement.setDate(2, competicion.getFechaSQL());
+	public boolean addManga(MangaModelo manga) throws SQLException {
+		preparedStatement = connect.prepareStatement(insertManga);
+		preparedStatement.setInt(1, manga.getCompeticion().getId());
+		preparedStatement.setInt(2, manga.getNmanga());
 		preparedStatement.executeUpdate();
-		
-		competicion.setId(getLastCompeticionID());
-		MangaGruposDAO dao = new MangaGruposDAO();
-		try {
-			dao.connectDB();
-			dao.createMangas(competicion);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		return true;
 	}
 	
-	public int getLastCompeticionID() throws SQLException {
-		preparedStatement = connect.prepareStatement(getLastCompeticionID);
-		resultSet = preparedStatement.executeQuery();
-		if(resultSet.next()) {
-			return resultSet.getInt("id");
-		}
-		return 0;
+	public boolean addGrupo(GrupoModelo grupo) throws SQLException {
+		preparedStatement = connect.prepareStatement(insertGrupo);
+		preparedStatement.setInt(1, grupo.getManga().getId());
+		preparedStatement.setInt(1, grupo.getPuntuacion().getId());
+		preparedStatement.setInt(2, grupo.getNgrupo());
+		preparedStatement.executeUpdate();
+		return true;
 	}
 
 	/**
@@ -200,5 +192,14 @@ public class CompetitionDAO {
 		preparedStatement.setInt(3, id);
 		preparedStatement.executeUpdate();
 		return true;
+	}
+
+	public MangaModelo getMangaCompeticion(CompeticionModelo competicion, int nmanga) throws SQLException {
+		preparedStatement = connect.prepareStatement(getMangaCompeticion);
+		preparedStatement.setInt(1, competicion.getId());
+		preparedStatement.setInt(2, nmanga);
+		resultSet = preparedStatement.executeQuery();
+		MangaModelo manga = new MangaModelo(resultSet.getInt("id"), competicion, resultSet.getInt("nmanga"));
+		return manga;
 	}
 }

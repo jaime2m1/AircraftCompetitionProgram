@@ -12,12 +12,16 @@ import org.xml.sax.SAXException;
 
 import Controlador.CompetitionDAO;
 import Controlador.DBConfigDAO;
+import Controlador.MangaGruposDAO;
 import Controlador.ScoreDAO;
 import Modelo.CompeticionModelo;
+import Modelo.GrupoModelo;
 import Modelo.PuntuacionModelo;
 import Modelo.UsuarioModelo;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -37,15 +41,17 @@ public class AddPuntuacionController {
 	private boolean okClicked = false;
 
 	@FXML
-	private TextField mangaLabel;
+	private Label mangaLabel;
 	@FXML
-	private TextField grupoLabel;
+	private Label grupoLabel;
 	@FXML
 	private TextField tiempoLabel;
 	@FXML
 	private TextField distanciaLabel;
 	@FXML
 	private TextField alturaLabel;
+	@FXML
+	private ChoiceBox mangaBoxLabel;
 	
 	private int nLicencia;
 	private CompeticionModelo competicion;
@@ -53,6 +59,9 @@ public class AddPuntuacionController {
 	@FXML
     public void initialize() {
 		setLoginUsuario();
+		for(int i=1; i<=6; i++) {
+			mangaBoxLabel.getItems().add(String.valueOf(i));
+		}
     }
 
 	public void setDialogStage(Stage dialogStage) {
@@ -80,6 +89,7 @@ public class AddPuntuacionController {
 	@FXML
 	public void addPuntuacion() {
 		if (isInputValid()) {
+			int lastPuntuacionId;
 			PuntuacionModelo puntuacion = new PuntuacionModelo();
 			UsuarioModelo usuario = new UsuarioModelo();
 			usuario.setNlicencia(nLicencia);
@@ -90,20 +100,28 @@ public class AddPuntuacionController {
 			puntuacion.setPenalizacion(0);
 			ScoreDAO dao = new ScoreDAO();
 			try {
+				//Generamos conexion y anadimos puntuacion
 				dao.connectDB();
 				dao.addPuntuacion(puntuacion);
+				//Guardamos el id que se le ha asignado a la puntuacion
+				puntuacion.setId(dao.getLastPuntuacionId());
+				
+				//Obtenemos el id de la manga
+				MangaGruposDAO grupoDAO = new MangaGruposDAO();
+				grupoDAO.connectDB();
+				int nmanga = Integer.parseInt((String) mangaBoxLabel.getValue());
+				
+				//Creamos un grupo con la relación de Puntuación y Manga
+				GrupoModelo grupo = new GrupoModelo();
+				grupo.setManga(grupoDAO.getMangaCompeticion(competicion, nmanga));
+				grupo.setPuntuacion(puntuacion);
+				grupo.setNgrupo(nmanga);
+				grupoDAO.addGrupo(grupo);
+				
 			} catch (SQLException | ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			try {
-				dao.connectDB();
-				dao.addPuntuacion(puntuacion);
-			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
 		}
 	}
 	

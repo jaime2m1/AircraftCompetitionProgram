@@ -206,6 +206,10 @@ public class ListViewController {
 		return encontrado;
 	}
 	
+	private boolean checkDateCompetition() {
+		return false
+	}
+	
 	/**
 	 * Inscribimos al usuario en la competición
 	 * @param event
@@ -344,6 +348,7 @@ public class ListViewController {
 			AddPuntuacionController controller = loader.getController();
 
 			controller.setDialogStage(dialogStage);
+			controller.setCompeticion(this.competicion);
 
 			dialogStage.showAndWait();
 
