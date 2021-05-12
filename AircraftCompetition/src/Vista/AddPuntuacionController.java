@@ -33,10 +33,6 @@ import javafx.stage.Stage;
  */
 public class AddPuntuacionController {
 
-	private double tiempo;
-	private double distancia;
-	private double altura;
-
 	private Stage dialogStage;
 	private boolean okClicked = false;
 
@@ -89,7 +85,6 @@ public class AddPuntuacionController {
 	@FXML
 	public void addPuntuacion() {
 		if (isInputValid()) {
-			int lastPuntuacionId;
 			PuntuacionModelo puntuacion = new PuntuacionModelo();
 			UsuarioModelo usuario = new UsuarioModelo();
 			usuario.setNlicencia(nLicencia);
@@ -117,6 +112,8 @@ public class AddPuntuacionController {
 				grupo.setPuntuacion(puntuacion);
 				grupo.setNgrupo(nmanga);
 				grupoDAO.addGrupo(grupo);
+				
+				dialogStage.close();
 				
 			} catch (SQLException | ClassNotFoundException e1) {
 				// TODO Auto-generated catch block

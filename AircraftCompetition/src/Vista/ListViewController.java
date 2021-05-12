@@ -2,6 +2,7 @@ package Vista;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,6 +13,7 @@ import org.xml.sax.SAXException;
 import Controlador.CompetitionDAO;
 import Controlador.DBConfigDAO;
 import Controlador.MainApp;
+import Controlador.MangaGruposDAO;
 import Controlador.UserCompetitionDAO;
 import Modelo.CompeticionModelo;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -69,6 +71,8 @@ public class ListViewController {
     
     private int nLicencia;
     private CompeticionModelo competicion;
+    private Date today = new Date();
+    private LocalDate todayLD = LocalDate.now();
     
     public ListViewController() {
     }
@@ -99,7 +103,7 @@ public class ListViewController {
      * Establecemos los datos de la tabla
      */
 	public void setTableData() {
-    	System.out.println("Set table data");
+    	//System.out.println("Set table data");
     	CompetitionDAO dao = new CompetitionDAO();
     	ObservableList<CompeticionModelo> listaCompeticiones;
     	
@@ -128,18 +132,20 @@ public class ListViewController {
 	private void showCompetitionDetails(CompeticionModelo competicion) {
         if (competicion != null) {
         	this.competicion=competicion;
-        	Date today = new Date();
+        	
         	
             competicionNombre.setText("Competicion "+competicion.getNombre());
             competicionFecha.setText("Fecha "+competicion.getFecha().toString());
             competicionNParticipantes.setText(competicion.getNParticipantesSTR()+" participantes");
             verClasificacion.setVisible(true);
-            if(!checkCompeticionUsuario(competicion)) {
+            //Si no está inscrito y antes de 20 días
+            if(!checkCompeticionUsuario(competicion) && checkDateCompetition()) {
             	inscribirse.setVisible(true);
             	desinscribirse.setVisible(false);
             	anadirPuntuacion.setVisible(false);
             	}
-            else {
+            //Si está inscrito y antes de 20 días
+            else if(checkCompeticionUsuario(competicion) && checkDateCompetition()){
             	inscribirse.setVisible(false);
             	desinscribirse.setVisible(true);
             	
@@ -149,14 +155,37 @@ public class ListViewController {
                 	anadirPuntuacion.setVisible(true);
                 }
             }
+            //Si está inscrito y después de 20 días
+            else if(checkCompeticionUsuario(competicion) && !checkDateCompetition()){
+            	inscribirse.setVisible(false);
+            	desinscribirse.setVisible(false);
+            	
+            	if(nLicencia==0) {
+            		anadirPuntuacion.setVisible(false);
+                }else {
+                	anadirPuntuacion.setVisible(true);
+                }
+            }
+            //Si no inscrito y después de 20 días
+            else if(!checkCompeticionUsuario(competicion) && !checkDateCompetition()){
+            	inscribirse.setVisible(false);
+            	desinscribirse.setVisible(false);
+            	
+            	if(nLicencia==0) {
+            		anadirPuntuacion.setVisible(false);
+                }else {
+                	anadirPuntuacion.setVisible(false);
+                }
+            }
             
             //Chequea si se esta en el plazo de 20 dias para inscribirse
             
-            if((competicion.getFecha().getTime() - 1728000000) > today.getTime() || today.getTime() > competicion.getFecha().getTime()) {
-            	inscribirse.setVisible(false);
-                desinscribirse.setVisible(false);
-                anadirPuntuacion.setVisible(false);
-            }
+//            if((competicion.getFecha().getTime() - 1728000000) > today.getTime() || today.getTime() > competicion.getFecha().getTime()) {
+//            	inscribirse.setVisible(false);
+//                desinscribirse.setVisible(false);
+//                anadirPuntuacion.setVisible(false);
+//            }
+            
         } else {
         	competicionNombre.setText("");
             competicionFecha.setText("");
@@ -191,11 +220,11 @@ public class ListViewController {
 		try {
 			dao.connectDB();
 			competiciones = dao.getCompeticionesDeUsuario(this.nLicencia);
-			System.out.println(competiciones.size());
+			//System.out.println(competiciones.size());
 			for(int i=0; i<competiciones.size(); i++) {
-				System.out.println("Id de competiciones "+competiciones.get(i).getId()+" = "+competicion.getId());
+				//System.out.println("Id de competiciones "+competiciones.get(i).getId()+" = "+competicion.getId());
 				if(competiciones.get(i).getId()==competicion.getId()) {
-					System.out.println("Encontrado coincidencia de competicion");
+					//System.out.println("Encontrado coincidencia de competicion");
 					encontrado=true;
 				}
 			}
@@ -207,7 +236,12 @@ public class ListViewController {
 	}
 	
 	private boolean checkDateCompetition() {
-		return false
+		if(todayLD.isBefore(competicion.getFechaLD().minusDays(20))) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	/**
@@ -301,6 +335,15 @@ public class ListViewController {
 			e.printStackTrace();
 		}
 		
+		MangaGruposDAO mangaDAO = new MangaGruposDAO();
+		try {
+			mangaDAO.connectDB();
+			mangaDAO.delMangaCompeticion(this.competicion.getId());
+		} catch (SQLException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**
@@ -315,9 +358,13 @@ public class ListViewController {
 			loader.setLocation(MainApp.class.getResource("../Vista/RootLayoutCompetition.fxml"));
 			loader.setLocation(MainApp.class.getResource("../Vista/ListParticipants.fxml"));
 			AnchorPane rootLayout = (AnchorPane) loader.load();
+			
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.centerOnScreen();
+			
+			ListParticipantsController controller = loader.getController();
+			controller.setCompeticion(this.competicion);
 
 			primaryStage.show();
 

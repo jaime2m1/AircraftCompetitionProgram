@@ -8,6 +8,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
+
 import Controlador.CompetitionDAO;
 import Controlador.DBConfigDAO;
 import Controlador.MainApp;
@@ -70,6 +72,7 @@ public class ListParticipantsController {
     
     private int nLicencia;
     private UsuarioModelo participante;
+    private CompeticionModelo competicion = new CompeticionModelo();
     
     public ListParticipantsController() {
     }
@@ -94,16 +97,16 @@ public class ListParticipantsController {
      * Establecemos los datos de la tabla
      */
 	public void setTableData() {
-    	System.out.println("Set table data");
+    	//System.out.println("Set table data");
     	UserDAO dao = new UserDAO();
     	ObservableList<UsuarioModelo> listaParticipantes;
     	
     	
     	try {
     		dao.connectDB();
-    		System.out.println("Establecemos los datos de la tabla");
+    		//System.out.println("Establecemos los datos de la tabla");
     		
-    		listaParticipantes = dao.getAllUsuariosOL();
+    		listaParticipantes = dao.getUsuariosOLCompeticion(competicion);
 			
     		puesto.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(String.valueOf(cellData.getValue().getPuesto())));
 			nombre.setCellValueFactory(cellData -> new ReadOnlyStringWrapper((cellData.getValue().getNombre()) + (cellData.getValue().getApellidos())));
@@ -120,7 +123,7 @@ public class ListParticipantsController {
         	this.participante=participante;
         	participantePuesto.setText("Puesto " + participante.getPuesto());
         	participanteNombre.setText("Nombre " + participante.getNombre() + participante.getApellidos());
-        	participanteLicencia.setText("Nº Licencia " + participante.getNlicencia());
+        	participanteLicencia.setText("No Licencia " + participante.getNlicencia());
         	participantePuntuacion.setText("Puntuacion " + participante.getPuntuacion());
         	participantePuntuacionTiempo.setText("");
         	participantePuntuacionDistancia.setText("");
@@ -159,9 +162,9 @@ public class ListParticipantsController {
 			competiciones = dao.getCompeticionesDeUsuario(this.nLicencia);
 			System.out.println(competiciones.size());
 			for(int i=0; i<competiciones.size(); i++) {
-				System.out.println("Id de competiciones "+competiciones.get(i).getId()+" = "+competicion.getId());
+				//System.out.println("Id de competiciones "+competiciones.get(i).getId()+" = "+competicion.getId());
 				if(competiciones.get(i).getId()==competicion.getId()) {
-					System.out.println("Encontrado coincidencia de competici�n");
+					//System.out.println("Encontrado coincidencia de competici�n");
 					encontrado=true;
 				}
 			}
@@ -190,6 +193,11 @@ public class ListParticipantsController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void setCompeticion(CompeticionModelo competicion) {
+		System.out.println("Competicion de lista de participantes asignada");
+		this.competicion = competicion;
 	}
 	
 	

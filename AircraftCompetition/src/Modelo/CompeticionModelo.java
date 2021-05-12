@@ -1,6 +1,9 @@
 package Modelo;
 
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import Controlador.UserCompetitionDAO;
@@ -54,6 +57,11 @@ public class CompeticionModelo {
 		java.sql.Date fechasql = new java.sql.Date(fecha.getTime());
 		return fechasql;
 	}
+	
+	public LocalDate getFechaLD() {
+		LocalDate fechaLD = Instant.ofEpochMilli(fecha.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+		return fechaLD;
+	}
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
@@ -72,7 +80,7 @@ public class CompeticionModelo {
 		try {
 			dao.connectDB();
 			this.nParticipantes = dao.getUsuariosDeCompeticion(id).size();
-			System.out.println("nParticipantes de "+this.nombre+" con id "+this.id+" es "+this.nParticipantes);
+			//System.out.println("nParticipantes de "+this.nombre+" con id "+this.id+" es "+this.nParticipantes);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

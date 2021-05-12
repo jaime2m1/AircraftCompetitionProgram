@@ -6,6 +6,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import Modelo.CompeticionModelo;
 import Modelo.UsuarioModelo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,6 +48,7 @@ public class UserDAO {
 	private String deleteUsuario = "DELETE FROM Usuarios WHERE nlicencia = ?";
 	private String updateUsuario = "UPDATE Usuarios SET nombre = ?, apellidos = ?, contrasena = ? WHERE nlicencia = ?";
 	private String getAllUsuarios = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios";
+	private String getUsuariosCompeticion = "SELECT u.nombre nombre, u.apellidos apellidos, u.nlicencia nlicencia, u.contrasena contrasena, uc.usuarioid, uc.competicionid FROM Usuarios u INNER JOIN UsuarioCompeticion uc ON u.nlicencia = uc.usuarioid WHERE uc.competicionid = ?";
 	//private String getAllUsuariosOrdered = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios ORDER BY puntuaciont";
 	private String getPuntuacionesUsuario = "SELECT usuarioid, tiempo, distancia, altura FROM Puntuacion WHERE usuarioid = ?";
 	private String getUsuario = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios WHERE nlicencia = ?";
@@ -111,6 +113,23 @@ public class UserDAO {
 	public ObservableList<UsuarioModelo> getAllUsuariosOL() throws SQLException {
 		ObservableList<UsuarioModelo> listaUsuariosOL = FXCollections.observableArrayList();
 		preparedStatement = connect.prepareStatement(getAllUsuarios);
+		resultSet = preparedStatement.executeQuery();
+		while (resultSet.next()) {
+			UsuarioModelo usuario = new UsuarioModelo();
+			usuario.setPuesto(0);
+			usuario.setNombre(resultSet.getString("nombre"));
+			usuario.setApellidos(resultSet.getString("apellidos"));
+			usuario.setNlicencia(resultSet.getInt("nlicencia"));
+			usuario.setPuntuacion(0);
+			listaUsuariosOL.add(usuario);
+		}
+		return listaUsuariosOL;
+	}
+	
+	public ObservableList<UsuarioModelo> getUsuariosOLCompeticion(CompeticionModelo competicion) throws SQLException {
+		ObservableList<UsuarioModelo> listaUsuariosOL = FXCollections.observableArrayList();
+		preparedStatement = connect.prepareStatement(getUsuariosCompeticion);
+		preparedStatement.setInt(1, competicion.getId());
 		resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
 			UsuarioModelo usuario = new UsuarioModelo();

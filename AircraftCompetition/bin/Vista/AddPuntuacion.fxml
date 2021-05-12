@@ -14,7 +14,7 @@
       <TextField fx:id="alturaLabel" layoutX="76.0" layoutY="183.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="183.0" />
       <Label layoutX="76.0" layoutY="166.0" text="Altura de corte" AnchorPane.topAnchor="166.0" />
       <TextField fx:id="distanciaLabel" layoutX="76.0" layoutY="128.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="128.0" />
-      <Button layoutX="130.0" layoutY="221.0" mnemonicParsing="false" text="Añadir" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="124.5" AnchorPane.rightAnchor="124.5" />
+      <Button layoutX="130.0" layoutY="221.0" mnemonicParsing="false" onAction="#addPuntuacion" text="Añadir" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="124.5" AnchorPane.rightAnchor="124.5" />
       <Label fx:id="mangaLabel" layoutX="14.0" layoutY="14.0" text="Manga: " />
       <Label fx:id="grupoLabel" layoutX="14.0" layoutY="32.0" text="Grupo: " />
       <ChoiceBox fx:id="mangaBoxLabel" layoutX="56.0" layoutY="10.0" prefHeight="10.0" prefWidth="40.0" />

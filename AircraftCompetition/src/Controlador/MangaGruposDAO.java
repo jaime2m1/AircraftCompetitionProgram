@@ -33,8 +33,8 @@ public class MangaGruposDAO {
 	private String passwd = "Competition";
 
 	private String insertManga = "INSERT INTO Manga (competicionid, nmanga) VALUES(?, ?)";
-	private String insertGrupo = "INSERT INTO Grupo (mangaid, puntuacionid, ngrupo) VALUES(?, ?, ?)";
-	private String deleteCompeticion = "DELETE FROM Competicion WHERE id = ?";
+	private String insertGrupo = "INSERT INTO Grupos (mangaid, puntuacionid, ngrupo) VALUES(?, ?, ?)";
+	private String deleteMangaCompeticion = "DELETE FROM Manga WHERE competicionid = ?";
 	private String updateCompeticion = "UPDATE Competicion SET nombre = ?, fecha = ? WHERE id = ?";
 	private String getAllCompeticiones = "SELECT id, nombre, fecha FROM Competicion";
 	private String getCompeticion = "SELECT id, nombre, fecha FROM Competicion WHERE nlicencia = ?";
@@ -146,8 +146,8 @@ public class MangaGruposDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public boolean delCompeticion(int id) throws SQLException {
-		preparedStatement = connect.prepareStatement(deleteCompeticion);
+	public boolean delMangaCompeticion(int id) throws SQLException {
+		preparedStatement = connect.prepareStatement(deleteMangaCompeticion);
 		preparedStatement.setInt(1, id);
 		preparedStatement.executeQuery();
 		return true;
@@ -171,8 +171,8 @@ public class MangaGruposDAO {
 	public boolean addGrupo(GrupoModelo grupo) throws SQLException {
 		preparedStatement = connect.prepareStatement(insertGrupo);
 		preparedStatement.setInt(1, grupo.getManga().getId());
-		preparedStatement.setInt(1, grupo.getPuntuacion().getId());
-		preparedStatement.setInt(2, grupo.getNgrupo());
+		preparedStatement.setInt(2, grupo.getPuntuacion().getId());
+		preparedStatement.setInt(3, grupo.getNgrupo());
 		preparedStatement.executeUpdate();
 		return true;
 	}
@@ -199,7 +199,11 @@ public class MangaGruposDAO {
 		preparedStatement.setInt(1, competicion.getId());
 		preparedStatement.setInt(2, nmanga);
 		resultSet = preparedStatement.executeQuery();
-		MangaModelo manga = new MangaModelo(resultSet.getInt("id"), competicion, resultSet.getInt("nmanga"));
+		if(resultSet.next()) {
+			MangaModelo manga = new MangaModelo(resultSet.getInt("id"), competicion, resultSet.getInt("nmanga"));
+			return manga;
+		}
+		MangaModelo manga = new MangaModelo();
 		return manga;
 	}
 }
