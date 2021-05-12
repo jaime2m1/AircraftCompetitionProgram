@@ -36,7 +36,7 @@ CREATE TABLE Puntuacion(
 	tiempo INT NOT NULL,
 	distancia INT NOT NULL,
 	altura INT NOT NULL,
-	penalizaci�n INT NOT NULL,
+	penalizacion INT NOT NULL,
 	FOREIGN KEY (usuarioid) REFERENCES Usuarios(nlicencia)
 );
 

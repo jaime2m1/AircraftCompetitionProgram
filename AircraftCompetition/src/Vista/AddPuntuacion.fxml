@@ -15,5 +15,7 @@
       <Label layoutX="76.0" layoutY="105.0" text="Altura de corte" AnchorPane.topAnchor="160.0" />
       <TextField fx:id="distanciaLabel" layoutX="76.0" layoutY="118.0" AnchorPane.leftAnchor="75.5" AnchorPane.rightAnchor="75.5" AnchorPane.topAnchor="118.0" />
       <Button layoutX="130.0" layoutY="221.0" mnemonicParsing="false" text="Añadir" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="124.5" AnchorPane.rightAnchor="124.5" />
+      <Label fx:id="mangaLabel" layoutX="14.0" layoutY="14.0" text="Manga: " />
+      <Label fx:id="grupoLabel" layoutX="14.0" layoutY="32.0" text="Grupo: " />
    </children>
 </AnchorPane>

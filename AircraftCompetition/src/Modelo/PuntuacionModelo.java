@@ -11,7 +11,12 @@ public class PuntuacionModelo {
 	private int segundosVuelo;
 	private int distanciaVuelo;
 	private int alturaVuelo;
-
+	private int penalizacion;
+	
+	public PuntuacionModelo(){
+		
+	}
+			
 	public PuntuacionModelo(int id, UsuarioModelo usuario, int segundosVuelo, int distanciaVuelo, int alturaVuelo) {
 		super();
 		this.id = id;
@@ -19,6 +24,17 @@ public class PuntuacionModelo {
 		this.segundosVuelo = segundosVuelo;
 		this.distanciaVuelo = distanciaVuelo;
 		this.alturaVuelo = alturaVuelo;
+		this.penalizacion = 0;
+	}
+
+	public PuntuacionModelo(int id, UsuarioModelo usuario, int segundosVuelo, int distanciaVuelo, int alturaVuelo, int penalizacion) {
+		super();
+		this.id = id;
+		this.usuario = usuario;
+		this.segundosVuelo = segundosVuelo;
+		this.distanciaVuelo = distanciaVuelo;
+		this.alturaVuelo = alturaVuelo;
+		this.penalizacion = penalizacion;
 	}
 
 	public int getId() {
@@ -45,11 +61,11 @@ public class PuntuacionModelo {
 		this.segundosVuelo = segundosVuelo;
 	}
 
-	public int getdistanciaVuelo() {
+	public int getDistanciaVuelo() {
 		return distanciaVuelo;
 	}
 
-	public void setdistanciaVuelo(int distanciaVuelo) {
+	public void setDistanciaVuelo(int distanciaVuelo) {
 		this.distanciaVuelo = distanciaVuelo;
 	}
 
@@ -60,5 +76,16 @@ public class PuntuacionModelo {
 	public void setAlturaVuelo(int alturaVuelo) {
 		this.alturaVuelo = alturaVuelo;
 	}
+
+
+	public int getPenalizacion() {
+		return penalizacion;
+	}
+
+
+	public void setPenalizacion(int penalizacion) {
+		this.penalizacion = penalizacion;
+	}
+	
 
 }

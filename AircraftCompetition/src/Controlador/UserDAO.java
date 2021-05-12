@@ -6,7 +6,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import Modelo.CompeticionModelo;
 import Modelo.UsuarioModelo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,7 +47,7 @@ public class UserDAO {
 	private String deleteUsuario = "DELETE FROM Usuarios WHERE nlicencia = ?";
 	private String updateUsuario = "UPDATE Usuarios SET nombre = ?, apellidos = ?, contrasena = ? WHERE nlicencia = ?";
 	private String getAllUsuarios = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios";
-	private String getAllUsuariosOrdered = "";
+	//private String getAllUsuariosOrdered = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios ORDER BY puntuaciont";
 	private String getPuntuacionesUsuario = "SELECT usuarioid, tiempo, distancia, altura FROM Puntuacion WHERE usuarioid = ?";
 	private String getUsuario = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios WHERE nlicencia = ?";
 
