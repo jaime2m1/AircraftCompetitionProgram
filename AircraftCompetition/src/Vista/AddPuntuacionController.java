@@ -2,15 +2,11 @@ package Vista;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import Controlador.CompetitionDAO;
 import Controlador.DBConfigDAO;
 import Controlador.MangaGruposDAO;
 import Controlador.ScoreDAO;
@@ -20,7 +16,6 @@ import Modelo.PuntuacionModelo;
 import Modelo.UsuarioModelo;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -47,7 +42,7 @@ public class AddPuntuacionController {
 	@FXML
 	private TextField alturaLabel;
 	@FXML
-	private ChoiceBox mangaBoxLabel;
+	private ChoiceBox<String> mangaBoxLabel;
 	
 	private int nLicencia;
 	private CompeticionModelo competicion;

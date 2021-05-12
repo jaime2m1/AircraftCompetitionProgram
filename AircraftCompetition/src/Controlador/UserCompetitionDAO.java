@@ -156,6 +156,14 @@ public class UserCompetitionDAO {
 		return true;
 	}
 	
+	/**
+	 * Se borra la relación del usuario con x competición
+	 * 
+	 * @param nlicencia
+	 * @param competicionid
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean delUsuarioCompeticion(int nlicencia, int competicionid) throws SQLException {
 		preparedStatement = connect.prepareStatement(deleteUsuarioCompeticionIds);
 		preparedStatement.setInt(1, nlicencia);

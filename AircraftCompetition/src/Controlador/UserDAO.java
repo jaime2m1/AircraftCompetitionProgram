@@ -126,6 +126,13 @@ public class UserDAO {
 		return listaUsuariosOL;
 	}
 	
+	/**
+	 * Obtenemos los usuarios de x competición
+	 * 
+	 * @param competicion
+	 * @return
+	 * @throws SQLException
+	 */
 	public ObservableList<UsuarioModelo> getUsuariosOLCompeticion(CompeticionModelo competicion) throws SQLException {
 		ObservableList<UsuarioModelo> listaUsuariosOL = FXCollections.observableArrayList();
 		preparedStatement = connect.prepareStatement(getUsuariosCompeticion);
@@ -158,7 +165,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * Mï¿½todo encargado de borrar un usuario especï¿½fico
+	 * Mï¿½todo encargado de borrar un usuario específico
 	 * 
 	 * @param id
 	 * @return
@@ -172,7 +179,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * Mï¿½todo encargado de aï¿½adir un usuario
+	 * Mï¿½todo encargado de anadir un usuario
 	 * 
 	 * @param usuario
 	 * @return
@@ -189,7 +196,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * Mï¿½todo encargado de modificar un usuario especï¿½fico
+	 * Método encargado de modificar un usuario específico
 	 * 
 	 * @param id
 	 * @param usuario
@@ -206,6 +213,13 @@ public class UserDAO {
 		return true;
 	}
 	
+	/**
+	 * Obtenemos las puntuaciones del usuario
+	 * 
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Integer> getPuntuacionesUsuario(int id) throws SQLException{
 		ArrayList<Integer> puntuaciones = new ArrayList<Integer>();
 		Integer total = 0;

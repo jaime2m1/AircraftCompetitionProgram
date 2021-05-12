@@ -15,6 +15,12 @@ import org.xml.sax.SAXException;
 import Modelo.PuntuacionModelo;
 import Modelo.UsuarioModelo;
 
+/**
+ * DAO de la puntuación
+ * 
+ * @author Jaime
+ *
+ */
 public class ScoreDAO {
 	public ArrayList<PuntuacionModelo> listaPuntuaciones = new ArrayList<PuntuacionModelo>();
 	
@@ -30,11 +36,12 @@ public class ScoreDAO {
 
 	private String insertPuntuacion = "INSERT INTO Puntuacion (usuarioid, tiempo, distancia, altura, penalizacion) VALUES(?, ?, ?, ?, ?)";
 	private String deletePuntuacionUsuario = "DELETE FROM Competicion WHERE usuarioid = ?";
-	//private String updateCompeticion = "UPDATE Competicion SET nombre = ?, fecha = ? WHERE id = ?";
 	private String getAllPuntuaciones = "SELECT p.id, u.nlicencia, u.nombre, u.apellidos, u.contrasena, p.tiempo, p.distancia, p.altura, p.penalizacion FROM Puntuacion p INNER JOIN Usuarios u ON p.usuarioid = u.nlicencia";
 	private String getLastPuntuacionId = "SELECT MAX(id) id FROM Puntuacion";
-	//private String getCompeticion = "SELECT id, nombre, fecha FROM Competicion WHERE nlicencia = ?";
 	
+	/**
+	 * Constructor del DAO
+	 */
 	public ScoreDAO() {
 		DBConfigDAO xmlDAO = new DBConfigDAO();
 		try {
@@ -48,6 +55,13 @@ public class ScoreDAO {
 		}
 	}
 	
+	/**
+	 * Conexión con la base de datos
+	 * 
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean connectDB() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		connect = DriverManager
@@ -55,6 +69,12 @@ public class ScoreDAO {
 		return true;
 	}
 	
+	/**
+	 * Obtienes todas las puntuaciones
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<PuntuacionModelo> getAllPuntuaciones() throws SQLException {
 		listaPuntuaciones.clear();
 		preparedStatement = connect.prepareStatement(getAllPuntuaciones);
@@ -71,6 +91,12 @@ public class ScoreDAO {
 		return listaPuntuaciones;
 	}
 	
+	/**
+	 * Obtiene el id de la última puntuacion
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public int getLastPuntuacionId() throws SQLException {
 		preparedStatement = connect.prepareStatement(getLastPuntuacionId);
 		resultSet = preparedStatement.executeQuery();
@@ -80,6 +106,13 @@ public class ScoreDAO {
 		return 0;
 	}
 	
+	/**
+	 * Anade una puntuacion
+	 * 
+	 * @param puntuacion
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean addPuntuacion(PuntuacionModelo puntuacion) throws SQLException {
 		preparedStatement = connect.prepareStatement(insertPuntuacion);
 		preparedStatement.setInt(1, puntuacion.getUsuario().getNlicencia());
@@ -91,6 +124,13 @@ public class ScoreDAO {
 		return true;
 	}
 	
+	/**
+	 * Borra una puntuación del usuario
+	 * 
+	 * @param usuarioid
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean delPuntuacionUsuario(int usuarioid) throws SQLException {
 		preparedStatement = connect.prepareStatement(deletePuntuacionUsuario);
 		preparedStatement.setInt(1, usuarioid);

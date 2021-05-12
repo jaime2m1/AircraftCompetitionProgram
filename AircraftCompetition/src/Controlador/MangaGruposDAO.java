@@ -16,8 +16,6 @@ import Modelo.CompeticionModelo;
 import Modelo.GrupoModelo;
 import Modelo.MangaModelo;
 import Modelo.PuntuacionModelo;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class MangaGruposDAO {
 	public ArrayList<CompeticionModelo> listaUsuarios = new ArrayList<CompeticionModelo>();
@@ -35,9 +33,7 @@ public class MangaGruposDAO {
 	private String insertManga = "INSERT INTO Manga (competicionid, nmanga) VALUES(?, ?)";
 	private String insertGrupo = "INSERT INTO Grupos (mangaid, puntuacionid, ngrupo) VALUES(?, ?, ?)";
 	private String deleteMangaCompeticion = "DELETE FROM Manga WHERE competicionid = ?";
-	private String updateCompeticion = "UPDATE Competicion SET nombre = ?, fecha = ? WHERE id = ?";
-	private String getAllCompeticiones = "SELECT id, nombre, fecha FROM Competicion";
-	private String getCompeticion = "SELECT id, nombre, fecha FROM Competicion WHERE nlicencia = ?";
+	private String getAllMangas = "SELECT id, competicionid, nmanga FROM Competicion";
 	private String getMangaCompeticion = "SELECT id, competicionid, nmanga FROM Manga WHERE competicionid = ? and nmanga = ?";
 
 	/**
@@ -58,7 +54,7 @@ public class MangaGruposDAO {
 	}
 
 	/**
-	 * Método para esrtablecer la conexión
+	 * Método para establecer la conexión
 	 * 
 	 * @return
 	 * @throws SQLException
@@ -71,6 +67,13 @@ public class MangaGruposDAO {
 		return true;
 	}
 	
+	/**
+	 * Método que crea las 6 mangas de la competición
+	 * 
+	 * @param competicion
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean createMangas(CompeticionModelo competicion) throws SQLException {
 		for(int i=1; i<=6; i++) {
 			MangaModelo manga = new MangaModelo(i, competicion);
@@ -78,6 +81,14 @@ public class MangaGruposDAO {
 		}
 		return true;
 	}
+	/**
+	 * Método para crear los grupos de la manga
+	 * 
+	 * @param manga
+	 * @param puntuacion
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean createGrupos(MangaModelo manga, PuntuacionModelo puntuacion) throws SQLException {
 		for(int i=1; i<=2; i++) {
 			GrupoModelo grupo = new GrupoModelo(manga, puntuacion, i);
@@ -94,7 +105,7 @@ public class MangaGruposDAO {
 	 */
 	public ArrayList<CompeticionModelo> getAllMangas() throws SQLException {
 		listaUsuarios.clear();
-		preparedStatement = connect.prepareStatement(getAllCompeticiones);
+		preparedStatement = connect.prepareStatement(getAllMangas);
 		resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
 			CompeticionModelo competicion = new CompeticionModelo();
@@ -103,40 +114,6 @@ public class MangaGruposDAO {
 			listaUsuarios.add(competicion);
 		}
 		return listaUsuarios;
-	}
-
-	/**
-	 * Método que devuelve todas las competiciones en formato ObservableList
-	 * 
-	 * @return
-	 * @throws SQLException
-	 */
-	public ObservableList<CompeticionModelo> getAllCompeticionesOL() throws SQLException {
-		ObservableList<CompeticionModelo> listaCompeticionesOL = FXCollections.observableArrayList();
-		preparedStatement = connect.prepareStatement(getAllCompeticiones);
-		resultSet = preparedStatement.executeQuery();
-		while (resultSet.next()) {
-			CompeticionModelo competicion = new CompeticionModelo();
-			competicion.setId(resultSet.getInt("id"));
-			competicion.setNombre(resultSet.getString("nombre"));
-			competicion.setFecha(resultSet.getDate("fecha"));
-			listaCompeticionesOL.add(competicion);
-		}
-		return listaCompeticionesOL;
-	}
-
-	/**
-	 * Método para obtener un {@link Modelo.CompeticionModelo} específico
-	 * 
-	 * @param id
-	 * @return
-	 * @throws SQLException
-	 */
-	public CompeticionModelo getCompeticion(int id) throws SQLException {
-		preparedStatement = connect.prepareStatement(getCompeticion);
-		preparedStatement.setInt(1, id);
-		resultSet = preparedStatement.executeQuery();
-		return null;
 	}
 
 	/**
@@ -154,7 +131,7 @@ public class MangaGruposDAO {
 	}
 
 	/**
-	 * Método para añadir una competición
+	 * Método para añadir una manga
 	 * 
 	 * @param competicion
 	 * @return
@@ -168,6 +145,13 @@ public class MangaGruposDAO {
 		return true;
 	}
 	
+	/**
+	 * Método para anadir un grupo
+	 * 
+	 * @param grupo
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean addGrupo(GrupoModelo grupo) throws SQLException {
 		preparedStatement = connect.prepareStatement(insertGrupo);
 		preparedStatement.setInt(1, grupo.getManga().getId());
@@ -178,22 +162,13 @@ public class MangaGruposDAO {
 	}
 
 	/**
-	 * Método para actualizar una competición específica
+	 * Obtienes específica manga de una competición
 	 * 
-	 * @param id
 	 * @param competicion
+	 * @param nmanga
 	 * @return
 	 * @throws SQLException
 	 */
-	public boolean modCompeticion(int id, CompeticionModelo competicion) throws SQLException {
-		preparedStatement = connect.prepareStatement(updateCompeticion);
-		preparedStatement.setString(1, competicion.getNombre());
-		preparedStatement.setDate(2, competicion.getFechaSQL());
-		preparedStatement.setInt(3, id);
-		preparedStatement.executeUpdate();
-		return true;
-	}
-
 	public MangaModelo getMangaCompeticion(CompeticionModelo competicion, int nmanga) throws SQLException {
 		preparedStatement = connect.prepareStatement(getMangaCompeticion);
 		preparedStatement.setInt(1, competicion.getId());

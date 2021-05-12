@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -71,7 +70,6 @@ public class ListViewController {
     
     private int nLicencia;
     private CompeticionModelo competicion;
-    private Date today = new Date();
     private LocalDate todayLD = LocalDate.now();
     
     public ListViewController() {

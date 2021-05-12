@@ -2,18 +2,8 @@ package Vista;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
-
-import Controlador.CompetitionDAO;
-import Controlador.DBConfigDAO;
 import Controlador.MainApp;
-import Controlador.UserCompetitionDAO;
 import Controlador.UserDAO;
 import Modelo.CompeticionModelo;
 import Modelo.UsuarioModelo;
@@ -28,7 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -70,8 +59,6 @@ public class ListParticipantsController {
     @FXML
     private Button anadirPuntuacion;
     
-    private int nLicencia;
-    private UsuarioModelo participante;
     private CompeticionModelo competicion = new CompeticionModelo();
     
     public ListParticipantsController() {
@@ -79,7 +66,6 @@ public class ListParticipantsController {
     
     @FXML
     private void initialize() {
-    	setLoginUsuario();
     	setTableData();
     	participantsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showParticipantDetails(newValue));
     	participantePuesto.setText("");
@@ -120,7 +106,6 @@ public class ListParticipantsController {
     }
 	private void showParticipantDetails(UsuarioModelo participante) {
         if (participante != null) {
-        	this.participante=participante;
         	participantePuesto.setText("Puesto " + participante.getPuesto());
         	participanteNombre.setText("Nombre " + participante.getNombre() + participante.getApellidos());
         	participanteLicencia.setText("No Licencia " + participante.getNlicencia());
@@ -140,40 +125,6 @@ public class ListParticipantsController {
         }
     }
 	
-	//Checkpoint
-	
-	private void setLoginUsuario() {
-		DBConfigDAO dao = new DBConfigDAO();
-		try {
-			nLicencia = Integer.parseInt(dao.readDBConfig()[4]);
-		} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	private boolean checkCompeticionUsuario(CompeticionModelo competicion) {
-		UserCompetitionDAO dao = new UserCompetitionDAO();
-		ArrayList<CompeticionModelo> competiciones;
-		Boolean encontrado = false;
-		
-		try {
-			dao.connectDB();
-			competiciones = dao.getCompeticionesDeUsuario(this.nLicencia);
-			System.out.println(competiciones.size());
-			for(int i=0; i<competiciones.size(); i++) {
-				//System.out.println("Id de competiciones "+competiciones.get(i).getId()+" = "+competicion.getId());
-				if(competiciones.get(i).getId()==competicion.getId()) {
-					//System.out.println("Encontrado coincidencia de competici�n");
-					encontrado=true;
-				}
-			}
-		} catch (SQLException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return encontrado;
-	}
 	
 	@FXML
 	public void gotoPantallaPrincipal(ActionEvent event) throws IOException {

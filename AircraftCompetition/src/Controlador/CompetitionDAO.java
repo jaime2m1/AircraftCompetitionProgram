@@ -176,6 +176,12 @@ public class CompetitionDAO {
 		return true;
 	}
 	
+	/**
+	 * Método para obtener el id de la última competición
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public int getLastCompeticionID() throws SQLException {
 		preparedStatement = connect.prepareStatement(getLastCompeticionID);
 		resultSet = preparedStatement.executeQuery();
