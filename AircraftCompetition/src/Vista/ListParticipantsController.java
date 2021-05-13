@@ -2,6 +2,7 @@ package Vista;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Comparator;
 
 import Controlador.MainApp;
 import Controlador.UserDAO;
@@ -94,9 +95,19 @@ public class ListParticipantsController {
     		
     		listaParticipantes = dao.getUsuariosOLCompeticion(competicion);
     		
+    		//Actualizamos la puntuacion
     		for(int i=0; i<listaParticipantes.size(); i++) {
     			listaParticipantes.get(i).updatePuntuacionCompe(competicion.getId());
     		}
+    		
+    		//Ordenamos la lista de participantes
+    		listaParticipantes.sort((a, b) -> Double.compare(b.getPuntuacionCompe(), a.getPuntuacionCompe()));
+    		
+    		//Establecemos el puesto
+    		for(int i=0; i<listaParticipantes.size(); i++) {
+    			listaParticipantes.get(i).setPuesto(i+1);
+    		}
+    		
     	
     		puesto.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(String.valueOf(cellData.getValue().getPuesto())));
 			nombre.setCellValueFactory(cellData -> new ReadOnlyStringWrapper((cellData.getValue().getNombre()) + (cellData.getValue().getApellidos())));

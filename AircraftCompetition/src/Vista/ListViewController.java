@@ -385,7 +385,7 @@ public class ListViewController {
 			AnchorPane page = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Añadir puntuacion");
+			dialogStage.setTitle("Anadir puntuacion");
 			dialogStage.getIcons().add(new Image("file:resources/images/plane.png"));
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(MainApp.getPrimaryStage());
