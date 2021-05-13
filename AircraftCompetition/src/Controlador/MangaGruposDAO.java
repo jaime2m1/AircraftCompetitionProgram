@@ -35,6 +35,9 @@ public class MangaGruposDAO {
 	private String deleteMangaCompeticion = "DELETE FROM Manga WHERE competicionid = ?";
 	private String getAllMangas = "SELECT id, competicionid, nmanga FROM Competicion";
 	private String getMangaCompeticion = "SELECT id, competicionid, nmanga FROM Manga WHERE competicionid = ? and nmanga = ?";
+	private String getMangasCompeticion = "SELECT id, competicionid, nmanga FROM Manga WHERE competicionid = ?";
+	private String getNGruposManga = "SELECT COUNT(id) ngrupos FROM Grupos WHERE mangaid = ? AND ngrupo = ?";
+	private String getIDPuntuacionesManga = "SELECT puntuacionid FROM Grupos WHERE mangaid = ?";
 
 	/**
 	 * Constructor del DAO que usa la configuración del XML
@@ -181,4 +184,45 @@ public class MangaGruposDAO {
 		MangaModelo manga = new MangaModelo();
 		return manga;
 	}
+	
+	public ArrayList<MangaModelo> getMangasCompeticion(int competicionid) throws SQLException {
+		ArrayList<MangaModelo> mangas = new ArrayList<MangaModelo>();
+		preparedStatement = connect.prepareStatement(getMangasCompeticion);
+		preparedStatement.setInt(1, competicionid);
+		resultSet = preparedStatement.executeQuery();
+		if(resultSet.next()) {
+			MangaModelo manga = new MangaModelo();
+			manga.setId(resultSet.getInt("id"));
+			manga.setId(resultSet.getInt("competicionid"));
+			manga.setId(resultSet.getInt("nmanga"));
+			mangas.add(manga);
+		}
+		return mangas;
+	}
+	
+	public ArrayList<Integer> getIDPuntuacionesManga(int manga) throws SQLException {
+		ArrayList<Integer> puntuacionesID = new ArrayList<>();
+		preparedStatement = connect.prepareStatement(getIDPuntuacionesManga);
+		preparedStatement.setInt(1, manga);
+		resultSet = preparedStatement.executeQuery();
+		while(resultSet.next()) {
+			int IDpuntuacion = resultSet.getInt("puntuacionid");
+			puntuacionesID.add(IDpuntuacion);
+		}
+		return puntuacionesID;
+	}
+	
+	public int getNGruposManga(int manga, int grupo) throws SQLException {
+		preparedStatement = connect.prepareStatement(getNGruposManga);
+		preparedStatement.setInt(1, manga);
+		preparedStatement.setInt(2, grupo);
+		resultSet = preparedStatement.executeQuery();
+		if(resultSet.next()) {
+			int nGrupo = resultSet.getInt("ngrupos");
+			return nGrupo;
+		}
+		return 0;
+	}
+	
+	
 }

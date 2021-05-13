@@ -13,6 +13,8 @@ public class PuntuacionModelo {
 	private int alturaVuelo;
 	private int penalizacion;
 	
+	private int puntuacionTotal;
+	
 	public PuntuacionModelo(){
 		
 	}
@@ -87,5 +89,41 @@ public class PuntuacionModelo {
 		this.penalizacion = penalizacion;
 	}
 	
-
+	public void setPuntuacionTotal() {
+		this.puntuacionTotal = getPuntuacionTotal();
+	}
+	
+	public int getPuntuacionTotal() {
+		int total;
+		total = this.segundosVuelo;
+		
+		switch(this.distanciaVuelo){
+		case 0:
+			total += 50;
+			break;
+		case 1:
+			total += 45;
+			break;
+		case 2:
+			total += 40;
+			break;
+		case 3: case 4:
+			total += 35;
+			break;
+		case 5: case 6: case 7: case 8: case 9:
+			total += 30;
+			break;
+		default:
+			total += 0;
+			break;
+		}
+		
+		if(this.alturaVuelo <= 200) {
+			total -= (this.alturaVuelo/2);
+		}else {
+			total -= 100;
+			total -= ((this.alturaVuelo - 200) * 3);
+		}
+		return total;
+	}
 }

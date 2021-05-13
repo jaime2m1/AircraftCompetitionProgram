@@ -25,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -385,6 +386,7 @@ public class ListViewController {
 
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Añadir puntuacion");
+			dialogStage.getIcons().add(new Image("file:resources/images/plane.png"));
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(MainApp.getPrimaryStage());
 			Scene scene = new Scene(page);

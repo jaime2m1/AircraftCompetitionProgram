@@ -1,5 +1,10 @@
 package Modelo;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import Controlador.UserDAO;
+
 /**
  * @author Jaime,Pablo,Juan
  * 
@@ -11,7 +16,8 @@ public class UsuarioModelo {
 	private int nlicencia;
 	private String contrasena;
 	private int puesto = 0;
-	private double puntuacion = 0;
+	private double puntuaciontotal = 0;
+	private double puntuacioncompe = 0;
 
 	public UsuarioModelo() {
 
@@ -24,18 +30,19 @@ public class UsuarioModelo {
 		this.nlicencia = nlicencia;
 		this.contrasena = contrasena;
 		this.puesto = 0;
-		this.puntuacion = 0;
+		this.puntuaciontotal = 0;
+		this.puntuacioncompe = 0;
 	}
 
-	public UsuarioModelo(String nombre, String apellidos, int nlicencia, String contrasena, int puesto, double puntuacion) {
+	public UsuarioModelo(String nombre, String apellidos, int nlicencia, String contrasena, int puesto, double puntuaciontotal, double puntuacioncompe) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.nlicencia = nlicencia;
 		this.contrasena = contrasena;
 		this.puesto = puesto;
-		this.puntuacion = puntuacion;
-		
+		this.puntuaciontotal = puntuaciontotal;
+		this.puntuacioncompe = puntuacioncompe;
 	}
 
 	public String getNombre() {
@@ -58,8 +65,8 @@ public class UsuarioModelo {
 		return puesto;
 	}
 
-	public double getPuntuacion() {
-		return puntuacion;
+	public double getPuntuacionTotal() {
+		return puntuaciontotal;
 	}
 
 	public void setNombre(String nombre) {
@@ -82,8 +89,48 @@ public class UsuarioModelo {
 		this.puesto = puesto;
 	}
 
-	public void setPuntuacion(double puntuacion) {
-		this.puntuacion = puntuacion;
+	public void setPuntuacionTotal(double puntuaciontotal) {
+		this.puntuaciontotal = puntuaciontotal;
+	}
+	
+	public double getPuntuacionCompe() {
+		return puntuacioncompe;
+	}
+
+	public void setPuntuacionCompe(double puntuacioncompe) {
+		this.puntuacioncompe = puntuacioncompe;
+	}
+
+	public void updatePuntuacionTotal() {
+		UserDAO dao = new UserDAO();
+		ArrayList<PuntuacionModelo> puntuaciones = new ArrayList<PuntuacionModelo>();
+		try {
+			dao.connectDB();
+			puntuaciones = dao.getPuntuacionesUsuario(nlicencia);
+			for(int i=0; i<puntuaciones.size(); i++) {
+				this.puntuaciontotal += puntuaciones.get(i).getPuntuacionTotal();
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void updatePuntuacionCompe(int competicionId) {
+		UserDAO dao = new UserDAO();
+		ArrayList<PuntuacionModelo> puntuaciones = new ArrayList<PuntuacionModelo>();
+		try {
+			dao.connectDB();
+			puntuaciones = dao.getPuntuacionesUsuarioCompeticion(this.nlicencia, competicionId);
+			for(int i=0; i<puntuaciones.size(); i++) {
+				this.puntuacioncompe += puntuaciones.get(i).getPuntuacionTotal();
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 

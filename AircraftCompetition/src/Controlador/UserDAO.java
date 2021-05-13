@@ -7,6 +7,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import Modelo.CompeticionModelo;
+import Modelo.MangaModelo;
+import Modelo.PuntuacionModelo;
 import Modelo.UsuarioModelo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -50,7 +52,7 @@ public class UserDAO {
 	private String getAllUsuarios = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios";
 	private String getUsuariosCompeticion = "SELECT u.nombre nombre, u.apellidos apellidos, u.nlicencia nlicencia, u.contrasena contrasena, uc.usuarioid, uc.competicionid FROM Usuarios u INNER JOIN UsuarioCompeticion uc ON u.nlicencia = uc.usuarioid WHERE uc.competicionid = ?";
 	//private String getAllUsuariosOrdered = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios ORDER BY puntuaciont";
-	private String getPuntuacionesUsuario = "SELECT usuarioid, tiempo, distancia, altura FROM Puntuacion WHERE usuarioid = ?";
+	private String getPuntuacionesUsuario = "SELECT id, usuarioid, tiempo, distancia, altura FROM Puntuacion WHERE usuarioid = ?";
 	private String getUsuario = "SELECT nombre, apellidos, nlicencia, contrasena FROM Usuarios WHERE nlicencia = ?";
 
 	/**
@@ -120,7 +122,8 @@ public class UserDAO {
 			usuario.setNombre(resultSet.getString("nombre"));
 			usuario.setApellidos(resultSet.getString("apellidos"));
 			usuario.setNlicencia(resultSet.getInt("nlicencia"));
-			usuario.setPuntuacion(0);
+			usuario.setPuntuacionTotal(0);
+			usuario.setPuntuacionCompe(0);
 			listaUsuariosOL.add(usuario);
 		}
 		return listaUsuariosOL;
@@ -144,7 +147,8 @@ public class UserDAO {
 			usuario.setNombre(resultSet.getString("nombre"));
 			usuario.setApellidos(resultSet.getString("apellidos"));
 			usuario.setNlicencia(resultSet.getInt("nlicencia"));
-			usuario.setPuntuacion(0);
+			usuario.setPuntuacionTotal(0);
+			usuario.setPuntuacionCompe(0);
 			listaUsuariosOL.add(usuario);
 		}
 		return listaUsuariosOL;
@@ -220,49 +224,70 @@ public class UserDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<Integer> getPuntuacionesUsuario(int id) throws SQLException{
-		ArrayList<Integer> puntuaciones = new ArrayList<Integer>();
-		Integer total = 0;
+	public ArrayList<PuntuacionModelo> getPuntuacionesUsuario(int id) throws SQLException{
+		ArrayList<PuntuacionModelo> puntuaciones = new ArrayList<PuntuacionModelo>();
+		
 		preparedStatement = connect.prepareStatement(getPuntuacionesUsuario);
 		resultSet = preparedStatement.executeQuery();
 		
-		puntuaciones.add(resultSet.getInt("tiempo"));
-		puntuaciones.add(resultSet.getInt("distancia"));
-		puntuaciones.add(resultSet.getInt("altura"));
-		
-		total += puntuaciones.get(0);
-		
-		switch(puntuaciones.get(1)){
-			case 0:
-				total += 50;
-				break;
-			case 1:
-				total += 45;
-				break;
-			case 2:
-				total += 40;
-				break;
-			case 3: case 4:
-				total += 35;
-				break;
-			case 5: case 6: case 7: case 8: case 9:
-				total += 30;
-				break;
-			default:
-				total += 0;
-				break;
+		while (resultSet.next()) {
+			PuntuacionModelo puntuacion = new PuntuacionModelo();
+			puntuacion.setId(resultSet.getInt("id"));
+			puntuacion.setSegundosVuelo(resultSet.getInt("id"));
+			puntuacion.setDistanciaVuelo(resultSet.getInt("id"));
+			puntuacion.setAlturaVuelo(resultSet.getInt("id"));
+			puntuacion.setPenalizacion(resultSet.getInt("id"));
+			
+			puntuaciones.add(puntuacion);
 		}
-		
-		if(puntuaciones.get(2) <= 200) {
-			total -= (puntuaciones.get(2)/2);
-		}else {
-			total -= 100;
-			total -= ((puntuaciones.get(2) - 200) * 3);
-		}
-
-		puntuaciones.add(0, total);
-		
 		return puntuaciones;
+	}
+	
+	public ArrayList<PuntuacionModelo> getPuntuacionesUsuarioCompeticion(int id, int competicion) throws SQLException, ClassNotFoundException{
+		ArrayList<PuntuacionModelo> puntuacionesUsuarioCompeticion = new ArrayList<PuntuacionModelo>();
+		ArrayList<PuntuacionModelo> puntuacionesUsuario = new ArrayList<PuntuacionModelo>();
+		ArrayList<Integer> idPuntuacionesMangas = new ArrayList<>();
+		ArrayList<Integer> idPuntuacionesManga = new ArrayList<>();
 		
+		//Obtenemos puntuaciones de un usuario
+		preparedStatement = connect.prepareStatement(getPuntuacionesUsuario);
+		preparedStatement.setInt(1, id);
+		resultSet = preparedStatement.executeQuery();
+		while (resultSet.next()) {
+			PuntuacionModelo puntuacion = new PuntuacionModelo();
+			puntuacion.setId(resultSet.getInt("id"));
+			puntuacion.setSegundosVuelo(resultSet.getInt("tiempo"));
+			puntuacion.setDistanciaVuelo(resultSet.getInt("distancia"));
+			puntuacion.setAlturaVuelo(resultSet.getInt("altura"));
+			puntuacion.setPenalizacion(0);
+			
+			puntuacionesUsuario.add(puntuacion);
+		}
+		
+		//Obtener puntuaciones de una competicion
+		MangaGruposDAO MangaGruposDAO = new MangaGruposDAO();
+		MangaGruposDAO.connectDB();
+		//Obtenemos las mangas de x competicion
+		ArrayList<MangaModelo> mangas = MangaGruposDAO.getMangasCompeticion(competicion);
+		
+		for(int i=0; i<mangas.size(); i++) {
+			idPuntuacionesManga=(MangaGruposDAO.getIDPuntuacionesManga(mangas.get(i).getId()));
+			for(int o=0; o<idPuntuacionesManga.size(); o++) {
+				idPuntuacionesMangas.add(idPuntuacionesManga.get(o));
+			}
+		}
+		
+		for(int i=0; i<puntuacionesUsuario.size(); i++) {
+			for(int o=0; o<idPuntuacionesMangas.size(); o++) {
+				if(puntuacionesUsuario.get(i).getId()==idPuntuacionesMangas.get(o)) {
+					puntuacionesUsuarioCompeticion.add(puntuacionesUsuario.get(i));
+				}
+				else {
+					
+				}
+			}
+		}
+		
+		return puntuacionesUsuarioCompeticion;
 	}
 }

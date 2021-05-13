@@ -93,11 +93,15 @@ public class ListParticipantsController {
     		//System.out.println("Establecemos los datos de la tabla");
     		
     		listaParticipantes = dao.getUsuariosOLCompeticion(competicion);
-			
+    		
+    		for(int i=0; i<listaParticipantes.size(); i++) {
+    			listaParticipantes.get(i).updatePuntuacionCompe(competicion.getId());
+    		}
+    	
     		puesto.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(String.valueOf(cellData.getValue().getPuesto())));
 			nombre.setCellValueFactory(cellData -> new ReadOnlyStringWrapper((cellData.getValue().getNombre()) + (cellData.getValue().getApellidos())));
     		licencia.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(String.valueOf(cellData.getValue().getNlicencia())));
-    		puntuacion.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(String.valueOf(cellData.getValue().getPuntuacion())));
+    		puntuacion.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(String.valueOf(cellData.getValue().getPuntuacionCompe())));
 			participantsTable.setItems(listaParticipantes);
 		} catch (SQLException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -105,11 +109,12 @@ public class ListParticipantsController {
 		}
     }
 	private void showParticipantDetails(UsuarioModelo participante) {
+		setTableData();
         if (participante != null) {
         	participantePuesto.setText("Puesto " + participante.getPuesto());
         	participanteNombre.setText("Nombre " + participante.getNombre() + participante.getApellidos());
         	participanteLicencia.setText("No Licencia " + participante.getNlicencia());
-        	participantePuntuacion.setText("Puntuacion " + participante.getPuntuacion());
+        	participantePuntuacion.setText("Puntuacion " + participante.getPuntuacionCompe());
         	participantePuntuacionTiempo.setText("");
         	participantePuntuacionDistancia.setText("");
         	participantePuntuacionAltura.setText("");
@@ -149,6 +154,7 @@ public class ListParticipantsController {
 	public void setCompeticion(CompeticionModelo competicion) {
 		System.out.println("Competicion de lista de participantes asignada");
 		this.competicion = competicion;
+		setTableData();
 	}
 	
 	

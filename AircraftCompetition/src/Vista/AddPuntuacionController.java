@@ -105,7 +105,7 @@ public class AddPuntuacionController {
 				GrupoModelo grupo = new GrupoModelo();
 				grupo.setManga(grupoDAO.getMangaCompeticion(competicion, nmanga));
 				grupo.setPuntuacion(puntuacion);
-				grupo.setNgrupo(nmanga);
+				grupo.setNgrupo(asignarGrupo(nmanga));
 				grupoDAO.addGrupo(grupo);
 				
 				dialogStage.close();
@@ -129,6 +129,40 @@ public class AddPuntuacionController {
 
 	public void setCompeticion(CompeticionModelo competicion) {
 		this.competicion = competicion;
+	}
+	
+	private int asignarGrupo(int manga) {
+		MangaGruposDAO dao = new MangaGruposDAO();
+		int NGrupo1, NGrupo2, GrupoFin = 0;
+		try {
+			dao.connectDB();
+			
+			NGrupo1 = dao.getNGruposManga(manga, 1);
+			NGrupo2 = dao.getNGruposManga(manga, 2);
+			
+			if(NGrupo1 >= 10) {
+				GrupoFin = 2;
+				
+			} else if(NGrupo2 >= 10) {
+				GrupoFin = 1;
+				
+			} else {
+				if(Math.random()<=0.5) {
+					GrupoFin = 1;
+					
+				} else {
+					GrupoFin = 2;
+					
+				}
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return GrupoFin;
+		
 	}
 
 }
