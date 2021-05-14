@@ -192,9 +192,11 @@ public class MangaGruposDAO {
 		resultSet = preparedStatement.executeQuery();
 		if(resultSet.next()) {
 			MangaModelo manga = new MangaModelo();
+			CompeticionModelo competicion = new CompeticionModelo();
 			manga.setId(resultSet.getInt("id"));
-			manga.setId(resultSet.getInt("competicionid"));
-			manga.setId(resultSet.getInt("nmanga"));
+			competicion.setId(competicionid);
+			manga.setCompeticion(competicion);
+			manga.setNmanga(resultSet.getInt("nmanga"));
 			mangas.add(manga);
 		}
 		return mangas;

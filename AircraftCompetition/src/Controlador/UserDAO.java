@@ -243,7 +243,8 @@ public class UserDAO {
 		return puntuaciones;
 	}
 	
-	public ArrayList<PuntuacionModelo> getPuntuacionesUsuarioCompeticion(int id, int competicion) throws SQLException, ClassNotFoundException{
+	public ArrayList<PuntuacionModelo> getPuntuacionesUsuarioCompeticion(int usuarioid, int competicion) throws SQLException, ClassNotFoundException{
+		System.out.println("UserDAO - Ejecutamos la consulta de las puntuacionbes de usuario"+usuarioid+" en competicion"+competicion);
 		ArrayList<PuntuacionModelo> puntuacionesUsuarioCompeticion = new ArrayList<PuntuacionModelo>();
 		ArrayList<PuntuacionModelo> puntuacionesUsuario = new ArrayList<PuntuacionModelo>();
 		ArrayList<Integer> idPuntuacionesMangas = new ArrayList<>();
@@ -251,7 +252,7 @@ public class UserDAO {
 		
 		//Obtenemos puntuaciones de un usuario
 		preparedStatement = connect.prepareStatement(getPuntuacionesUsuario);
-		preparedStatement.setInt(1, id);
+		preparedStatement.setInt(1, usuarioid);
 		resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
 			PuntuacionModelo puntuacion = new PuntuacionModelo();
@@ -263,22 +264,27 @@ public class UserDAO {
 			
 			puntuacionesUsuario.add(puntuacion);
 		}
+		//System.out.println("UserDAO - Obtenidas las puntuaciones del usuario");
 		
 		//Obtener puntuaciones de una competicion
-		MangaGruposDAO MangaGruposDAO = new MangaGruposDAO();
-		MangaGruposDAO.connectDB();
+		MangaGruposDAO mangagruposDAO = new MangaGruposDAO();
+		mangagruposDAO.connectDB();
 		//Obtenemos las mangas de x competicion
-		ArrayList<MangaModelo> mangas = MangaGruposDAO.getMangasCompeticion(competicion);
+		ArrayList<MangaModelo> mangas = mangagruposDAO.getMangasCompeticion(competicion);
+		//System.out.println("UserDAO - Obtenidas las mangas de la competición");
 		
 		for(int i=0; i<mangas.size(); i++) {
-			idPuntuacionesManga=(MangaGruposDAO.getIDPuntuacionesManga(mangas.get(i).getId()));
+			idPuntuacionesManga=(mangagruposDAO.getIDPuntuacionesManga(mangas.get(i).getId()));
+			//System.out.println("UserDAO - Las puntuaciones de la manga"+mangas.get(i).getId()+" son "+idPuntuacionesManga.size());
 			for(int o=0; o<idPuntuacionesManga.size(); o++) {
 				idPuntuacionesMangas.add(idPuntuacionesManga.get(o));
 			}
 		}
-		
+		//System.out.println("UserDAO - Recorrido la reasignación de los ids de las puntuaciones de las mangas");
+		//System.out.println("UserDAO - Puntuaciones de usuario => "+puntuacionesUsuario.size()+" puntuaciones de mangas => "+idPuntuacionesMangas.size());
 		for(int i=0; i<puntuacionesUsuario.size(); i++) {
 			for(int o=0; o<idPuntuacionesMangas.size(); o++) {
+				//System.out.println("Puntuacion de usuario"+usuarioid+" es id"+puntuacionesUsuario.get(i).getId()+" el recorrido de las puntuaciones de manga es id"+idPuntuacionesMangas.get(o));
 				if(puntuacionesUsuario.get(i).getId()==idPuntuacionesMangas.get(o)) {
 					puntuacionesUsuarioCompeticion.add(puntuacionesUsuario.get(i));
 				}
@@ -287,6 +293,7 @@ public class UserDAO {
 				}
 			}
 		}
+		//System.out.println("UserDAO - Recorrido la asignación de puntuaciones coincidentes");
 		
 		return puntuacionesUsuarioCompeticion;
 	}

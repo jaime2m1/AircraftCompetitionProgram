@@ -59,25 +59,11 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Group layoutX="14.0" layoutY="131.0" AnchorPane.leftAnchor="15.0">
-               <children>
-                  <Label fx:id="participantePuntuacionTiempo" text="Tiempo de vuelo">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="participantePuntuacionDistancia" layoutY="26.0" text="Distancia de aterrizaje">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="participantePuntuacionAltura" layoutY="52.0" text="Altura de corte">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Group>
+            <ScrollPane layoutX="5.0" layoutY="131.0" prefHeight="371.0" prefWidth="523.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="368.0" prefWidth="507.0" />
+              </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
    </children>

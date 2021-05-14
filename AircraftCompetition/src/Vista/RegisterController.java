@@ -34,6 +34,8 @@ public class RegisterController {
     private TextField contrasenaLabel;
     @FXML
     private TextField repcontrasenaLabel;
+    
+    private Stage window;
 	
 	/**
 	 * Realizamos la conexión a la base de datos
@@ -54,7 +56,7 @@ public class RegisterController {
     	Scene loginCreateScene = new Scene(loginCreateView);
     	
     	//Get stage info
-    	Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+    	window = (Stage) ((Node)event.getSource()).getScene().getWindow();
     	window.setScene(loginCreateScene);
     	window.show();
     }
@@ -93,6 +95,13 @@ public class RegisterController {
 			e.printStackTrace();
 		}
     	
+    	Parent loginCreateView = FXMLLoader.load(getClass().getResource("../Vista/LoginCreateView.fxml"));
+    	Scene loginCreateScene = new Scene(loginCreateView);
+    	
+    	//Get stage info
+    	window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+    	window.setScene(loginCreateScene);
+    	window.show();
     	
     }
 }

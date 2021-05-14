@@ -3,5 +3,5 @@
 	<database>AircraftCompetitionDB</database>
 	<user>Aircraft</user>
 	<password>Competition</password>
-	<loginUser>1</loginUser>
+	<loginUser>3</loginUser>
 </DBConfig>

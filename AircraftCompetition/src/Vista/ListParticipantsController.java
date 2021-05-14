@@ -2,7 +2,6 @@ package Vista;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Comparator;
 
 import Controlador.MainApp;
 import Controlador.UserDAO;
@@ -50,12 +49,6 @@ public class ListParticipantsController {
     private Label participanteLicencia;
     @FXML
     private Label participantePuntuacion;
-    @FXML
-    private Label participantePuntuacionTiempo;
-    @FXML
-    private Label participantePuntuacionDistancia;
-    @FXML
-    private Label participantePuntuacionAltura;
     
     @FXML
     private Button anadirPuntuacion;
@@ -73,9 +66,6 @@ public class ListParticipantsController {
     	participanteNombre.setText("");
     	participanteLicencia.setText("");
     	participantePuntuacion.setText("");
-    	participantePuntuacionTiempo.setText("");
-    	participantePuntuacionDistancia.setText("");
-    	participantePuntuacionAltura.setText("");
         
     }
     
@@ -126,18 +116,14 @@ public class ListParticipantsController {
         	participanteNombre.setText("Nombre " + participante.getNombre() + participante.getApellidos());
         	participanteLicencia.setText("No Licencia " + participante.getNlicencia());
         	participantePuntuacion.setText("Puntuacion " + participante.getPuntuacionCompe());
-        	participantePuntuacionTiempo.setText("");
-        	participantePuntuacionDistancia.setText("");
-        	participantePuntuacionAltura.setText("");
+        	
         	
         } else {
         	participantePuesto.setText("");
         	participanteNombre.setText("");
         	participanteLicencia.setText("");
         	participantePuntuacion.setText("");
-        	participantePuntuacionTiempo.setText("");
-        	participantePuntuacionDistancia.setText("");
-        	participantePuntuacionAltura.setText("");
+        	
         }
     }
 	
