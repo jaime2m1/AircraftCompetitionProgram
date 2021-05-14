@@ -122,10 +122,10 @@ public class UsuarioModelo {
 		ArrayList<PuntuacionModelo> puntuaciones = new ArrayList<PuntuacionModelo>();
 		try {
 			dao.connectDB();
-			System.out.println("UsuarioModelo - Hacemos la consulta de "+this.nlicencia+" en "+competicionId);
+			//System.out.println("UsuarioModelo - Hacemos la consulta de "+this.nlicencia+" en "+competicionId);
 			puntuaciones = dao.getPuntuacionesUsuarioCompeticion(this.nlicencia, competicionId);
 			for(int i=0; i<puntuaciones.size(); i++) {
-				System.out.println("UsuarioModelo - Sumamos "+puntuaciones.get(i).getPuntuacionTotal()+" a la puntuación de "+this.nlicencia+" en "+competicionId );
+				//System.out.println("UsuarioModelo - Sumamos "+puntuaciones.get(i).getPuntuacionTotal()+" a la puntuación de "+this.nlicencia+" en "+competicionId );
 				this.puntuacioncompe += puntuaciones.get(i).getPuntuacionTotal();
 			}
 			
