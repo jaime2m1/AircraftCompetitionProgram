@@ -76,6 +76,9 @@ public class ListViewController {
     public ListViewController() {
     }
     
+    /**
+     * Iniciamos los valores
+     */
     @FXML
     private void initialize() {
     	setLoginUsuario();
@@ -178,13 +181,6 @@ public class ListViewController {
             }
             
             //Chequea si se esta en el plazo de 20 dias para inscribirse
-            
-//            if((competicion.getFecha().getTime() - 1728000000) > today.getTime() || today.getTime() > competicion.getFecha().getTime()) {
-//            	inscribirse.setVisible(false);
-//                desinscribirse.setVisible(false);
-//                anadirPuntuacion.setVisible(false);
-//            }
-            
         } else {
         	competicionNombre.setText("");
             competicionFecha.setText("");
@@ -234,6 +230,11 @@ public class ListViewController {
 		return encontrado;
 	}
 	
+	/**
+	 * Comprobamos la fecha de la competicion
+	 * 
+	 * @return
+	 */
 	private boolean checkDateCompetition() {
 		if(todayLD.isBefore(competicion.getFechaLD().minusDays(20))) {
 			return true;

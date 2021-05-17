@@ -107,7 +107,7 @@ public class UserDAO {
 	}
 	
 	/**
-	 * Mï¿½todo que devuelve todos los usuarios en formato ObservableList
+	 * Metodo que devuelve todos los usuarios en formato ObservableList
 	 * 
 	 * @return
 	 * @throws SQLException
@@ -155,7 +155,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * Mï¿½todo que obtiene un usuario especï¿½fico
+	 * Metodo que obtiene un usuario especï¿½fico
 	 * 
 	 * @param id
 	 * @return
@@ -169,7 +169,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * Mï¿½todo encargado de borrar un usuario específico
+	 * Metodo encargado de borrar un usuario específico
 	 * 
 	 * @param id
 	 * @return
@@ -183,7 +183,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * Mï¿½todo encargado de anadir un usuario
+	 * Metodo encargado de anadir un usuario
 	 * 
 	 * @param usuario
 	 * @return

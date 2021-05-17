@@ -93,6 +93,11 @@ public class PuntuacionModelo {
 		this.puntuacionTotal = getPuntuacionTotal();
 	}
 	
+	/**
+	 * Obtenemos la puntuacion total con los calculos de esta
+	 * 
+	 * @return
+	 */
 	public int getPuntuacionTotal() {
 		int total;
 		total = this.segundosVuelo;

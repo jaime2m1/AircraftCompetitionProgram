@@ -75,6 +75,9 @@ public class CompeticionModelo {
 		return String.valueOf(nParticipantes);
 	}
 	
+	/**
+	 * Establecemos el numero de participantes
+	 */
 	public void setNParticipantes() {
 		UserCompetitionDAO dao = new UserCompetitionDAO();
 		try {

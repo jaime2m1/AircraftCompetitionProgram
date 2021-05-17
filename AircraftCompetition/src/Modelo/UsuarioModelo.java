@@ -101,6 +101,9 @@ public class UsuarioModelo {
 		this.puntuacioncompe = puntuacioncompe;
 	}
 
+	/**
+	 * Actualizamos la puntuacion total del usuario
+	 */
 	public void updatePuntuacionTotal() {
 		UserDAO dao = new UserDAO();
 		ArrayList<PuntuacionModelo> puntuaciones = new ArrayList<PuntuacionModelo>();
@@ -117,6 +120,11 @@ public class UsuarioModelo {
 		}
 	}
 	
+	/**
+	 * Actualizamos la puntuacion de la competicion del usuario
+	 * 
+	 * @param competicionId
+	 */
 	public void updatePuntuacionCompe(int competicionId) {
 		UserDAO dao = new UserDAO();
 		ArrayList<PuntuacionModelo> puntuaciones = new ArrayList<PuntuacionModelo>();

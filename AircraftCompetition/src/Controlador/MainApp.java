@@ -63,6 +63,11 @@ public class MainApp extends Application {
 		}
 	}
 
+	/**
+	 * Mostramos la configuración de la base de datos
+	 * 
+	 * @return
+	 */
 	public boolean showDBConfig() {
 
 		try {

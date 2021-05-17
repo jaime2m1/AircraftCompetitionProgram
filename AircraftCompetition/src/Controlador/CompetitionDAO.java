@@ -70,7 +70,7 @@ public class CompetitionDAO {
 	}
 
 	/**
-	 * Método para esrtablecer la conexión
+	 * Método para establecer la conexión
 	 * 
 	 * @return
 	 * @throws SQLException

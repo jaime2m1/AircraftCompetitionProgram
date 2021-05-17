@@ -185,6 +185,13 @@ public class MangaGruposDAO {
 		return manga;
 	}
 	
+	/**
+	 * Obtiene las mangas de X competición
+	 * 
+	 * @param competicionid
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<MangaModelo> getMangasCompeticion(int competicionid) throws SQLException {
 		ArrayList<MangaModelo> mangas = new ArrayList<MangaModelo>();
 		preparedStatement = connect.prepareStatement(getMangasCompeticion);
@@ -202,6 +209,13 @@ public class MangaGruposDAO {
 		return mangas;
 	}
 	
+	/**
+	 * Obtenemos el id de las puntuaciones de X manga
+	 * 
+	 * @param manga
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Integer> getIDPuntuacionesManga(int manga) throws SQLException {
 		ArrayList<Integer> puntuacionesID = new ArrayList<>();
 		preparedStatement = connect.prepareStatement(getIDPuntuacionesManga);
@@ -214,6 +228,14 @@ public class MangaGruposDAO {
 		return puntuacionesID;
 	}
 	
+	/**
+	 * Obtenemos el número de grupo de X manga
+	 * 
+	 * @param manga
+	 * @param grupo
+	 * @return
+	 * @throws SQLException
+	 */
 	public int getNGruposManga(int manga, int grupo) throws SQLException {
 		preparedStatement = connect.prepareStatement(getNGruposManga);
 		preparedStatement.setInt(1, manga);

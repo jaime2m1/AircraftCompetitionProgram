@@ -77,6 +77,9 @@ public class AddPuntuacionController {
 		}
 	}
 
+	/**
+	 * Anadimos la puntuacion de el usuario en X competicion y x manga
+	 */
 	@FXML
 	public void addPuntuacion() {
 		if (isInputValid()) {
@@ -117,6 +120,9 @@ public class AddPuntuacionController {
 		}
 	}
 	
+	/**
+	 * Establecemos el usuario logeado
+	 */
 	private void setLoginUsuario() {
 		DBConfigDAO dao = new DBConfigDAO();
 		try {
@@ -127,10 +133,20 @@ public class AddPuntuacionController {
 		}
 	}
 
+	/**
+	 * Establecemos la competicion de la ventana
+	 * @param competicion
+	 */
 	public void setCompeticion(CompeticionModelo competicion) {
 		this.competicion = competicion;
 	}
 	
+	/**
+	 * Asignamos el grupo respecto la manga
+	 * 
+	 * @param manga
+	 * @return
+	 */
 	private int asignarGrupo(int manga) {
 		MangaGruposDAO dao = new MangaGruposDAO();
 		int NGrupo1, NGrupo2, GrupoFin = 0;

@@ -160,6 +160,12 @@ public class ListParticipantsController {
 			e.printStackTrace();
 		}
     }
+	
+	/**
+	 * Mostramos los detalles del participante
+	 * 
+	 * @param participante
+	 */
 	private void showParticipantDetails(UsuarioModelo participante) {
 		
 		
@@ -185,6 +191,12 @@ public class ListParticipantsController {
     }
 	
 	
+	/**
+	 * Vamos a la pantalla principal
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void gotoPantallaPrincipal(ActionEvent event) throws IOException {
 		try {
@@ -205,12 +217,22 @@ public class ListParticipantsController {
 		}
 	}
 	
+	/**
+	 * Establecemos la competicion
+	 * 
+	 * @param competicion
+	 */
 	public void setCompeticion(CompeticionModelo competicion) {
 		System.out.println("Competicion de lista de participantes asignada");
 		this.competicion = competicion;
 		setTableData();
 	}
 	
+	/**
+	 * Establecemos los detalles de la manga
+	 * 
+	 * @param participante
+	 */
 	public void setMangasDetails(UsuarioModelo participante) {
 		ArrayList<PuntuacionModelo> puntuaciones = new ArrayList<PuntuacionModelo>();
 		UserDAO dao = new UserDAO();
@@ -226,6 +248,11 @@ public class ListParticipantsController {
 		}
 	}
 	
+	/**
+	 * Recorremos todas las mangas para establecer la puntuacion
+	 * 
+	 * @param puntuaciones
+	 */
 	public void asignarPuntuaciones(ArrayList<PuntuacionModelo> puntuaciones) {
 		int tamano = puntuaciones.size();
 		
