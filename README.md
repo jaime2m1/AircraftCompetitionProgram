@@ -113,3 +113,5 @@ Proyecto creado por: Jaime, Juan y Pablo
 ```--module-path Directory\AircraftCompetitionProgram\AircraftCompetition\javafx-sdk-11.0.2\lib --add-modules=javafx.controls,javafx.fxml```
    
 ### 6 - Tras estos ajustes el proyecto debería funcionar sin problema
+
+(El proyecto viene con una base de datos predeterminada, si quiere puede crear la suya propia con Tables.txt)
