@@ -1,7 +1,12 @@
 # Aircraft Competition Program
+
+
+
 ## Objetivo:
 
 El objetivo de este proyecto es manejar competiciones de aeromodelismo, pudiendo añadir competiciones, eliminarlas, registrar usuarios...
+
+
 
 
 ## Funciones:
@@ -61,6 +66,8 @@ Para ver la clasificación de una competición pulsaremos el botón de
 “Ver clasificación” encontrado en la mitad del borde inferior.
 Tras esto, podremos ver la puntuación de todos los participantes.
 ```
+
+
 
 ## Posibles errores y cómo arreglarlos
 
