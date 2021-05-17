@@ -1,11 +1,7 @@
 # Aircraft Competition Program
 ## Objetivo:
 
-### El objetivo de este proyecto es manejar competiciones de
-
-### aeromodelismo, pudiendo añadir competiciones, eliminarlas,
-
-### registrar usuarios...
+El objetivo de este proyecto es manejar competiciones de aeromodelismo, pudiendo añadir competiciones, eliminarlas, registrar usuarios...
 
 
 ## Funciones:
@@ -22,7 +18,7 @@ abrirá una ventana que nos solicitará los datos de la base
 Para registrarse habrá que pulsar el botón de “Registrarse” en la
 ventana principal y rellenar los datos
 ```
-### Tras esto, ya estaría registrado
+Tras esto, ya estaría registrado
 
 
 ### 3. Iniciar sesión
@@ -91,3 +87,4 @@ aplicación.
 ```
 ```
 Proyecto creado por: Jaime, Juan y Pablo
+```
