@@ -16,47 +16,47 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Jaime/Documents/Eclipse-workspace/AircraftCompetitionProgram/javafx-sdk-11.0.2/lib/javafx.controls.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Jaime/Documents/Eclipse-workspace/AircraftCompetitionProgram/javafx-sdk-11.0.2/lib/javafx.base.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Jaime/Documents/Eclipse-workspace/AircraftCompetitionProgram/javafx-sdk-11.0.2/lib/javafx.fxml.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Jaime/Documents/Eclipse-workspace/AircraftCompetitionProgram/javafx-sdk-11.0.2/lib/javafx.graphics.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Jaime/Documents/Eclipse-workspace/AircraftCompetitionProgram/javafx-sdk-11.0.2/lib/javafx.media.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Jaime/Documents/Eclipse-workspace/AircraftCompetitionProgram/javafx-sdk-11.0.2/lib/javafx.swing.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Jaime/Documents/Eclipse-workspace/AircraftCompetitionProgram/javafx-sdk-11.0.2/lib/javafx.web.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Jaime/Documents/Eclipse-workspace/AircraftCompetitionProgram/javafx-sdk-11.0.2/lib/javafx-swt.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="mysql-connector-java-8.0.23/mysql-connector-java-8.0.23.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Jaime/Desktop/AircraftCompetitionProgram/AircraftCompetition/javafx-sdk-11.0.2/lib/javafx.base.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Jaime/Desktop/AircraftCompetitionProgram/AircraftCompetition/javafx-sdk-11.0.2/lib/javafx.controls.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Jaime/Desktop/AircraftCompetitionProgram/AircraftCompetition/javafx-sdk-11.0.2/lib/javafx.fxml.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Jaime/Desktop/AircraftCompetitionProgram/AircraftCompetition/javafx-sdk-11.0.2/lib/javafx.graphics.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Jaime/Desktop/AircraftCompetitionProgram/AircraftCompetition/javafx-sdk-11.0.2/lib/javafx.media.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Jaime/Desktop/AircraftCompetitionProgram/AircraftCompetition/javafx-sdk-11.0.2/lib/javafx.swing.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Jaime/Desktop/AircraftCompetitionProgram/AircraftCompetition/javafx-sdk-11.0.2/lib/javafx.web.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Jaime/Desktop/AircraftCompetitionProgram/AircraftCompetition/javafx-sdk-11.0.2/lib/javafx-swt.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
