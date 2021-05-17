@@ -86,7 +86,7 @@ varios clientes.
 En ese caso pulsa el botón de recargar. Si tras eso no funciona
 inténtalo más tarde
 ```
-## 3 - Error al pulsar botones (No reaccionan).
+### 3 - Error al pulsar botones (No reaccionan).
 
 ```
 Se desconocen los motivos de este error, se soluciona al reiniciar la
