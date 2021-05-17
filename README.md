@@ -1,6 +1,6 @@
 # Aircraft Competition Program
 
-![plane](https://user-images.githubusercontent.com/31405248/118562788-aacfde80-b76d-11eb-868a-daba636d7735.png)
+![planemid](https://user-images.githubusercontent.com/31405248/118563229-7a3c7480-b76e-11eb-8bb1-a238ba7aad70.png)
 
 
 ## Objetivo:
