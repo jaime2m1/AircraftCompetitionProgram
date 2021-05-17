@@ -11,13 +11,13 @@ El objetivo de este proyecto es manejar competiciones de aeromodelismo, pudiendo
 
 ## Funciones:
 
-### 1. Configurar la base de datos
+   1. Configurar la base de datos
 
 ```
 Si pulsamos la rueda dentada de la parte superior izquierda se nos
 abrirá una ventana que nos solicitará los datos de la base
 ```
-### 2. Registrarse
+    2. Registrarse
 
 ```
 Para registrarse habrá que pulsar el botón de “Registrarse” en la
@@ -26,14 +26,14 @@ ventana principal y rellenar los datos
 Tras esto, ya estaría registrado
 
 
-### 3. Iniciar sesión
+   3. Iniciar sesión
 
 ```
 Para iniciar sesión pulsaremos el botón de “Iniciar Sesión” de la
 ventana principal e introduciremos el número de licencia y
 contraseña
 ```
-### 4. Crear y eliminar competiciones
+   4. Crear y eliminar competiciones
 
 ```
 Para crear y eliminar competiciones iniciaremos sesión con el
@@ -42,14 +42,14 @@ Tras iniciar sesión como administrador, nos aparecerán los botones
 de “Nueva Competición” y “Borrar Competición”.
 ```
 
-### 5. Inscribirse y des inscribirse
+   5. Inscribirse y des inscribirse
 
 ```
 Para Inscribirse y Des inscribirse seleccionaremos una competición y
 pulsaremos el botón de la esquina inferior derecha, tras eso,
 pulsaremos el botón superior izquierdo para actualizar la página.
 ```
-### 6. Añadir puntuaciones
+   6. Añadir puntuaciones
 
 ```
 Para añadir puntuaciones pulsaremos el botón de “Añadir
@@ -59,7 +59,7 @@ Tras eso, nos aparecerá una ventana donde introduciremos la
 manga a la que corresponde la puntuación y el resto de datos.
 ```
 
-### 7. Ver clasificación
+   7. Ver clasificación
 
 ```
 Para ver la clasificación de una competición pulsaremos el botón de
@@ -71,13 +71,13 @@ Tras esto, podremos ver la puntuación de todos los participantes.
 
 ## Posibles errores y cómo arreglarlos
 
-### 1 - Error al iniciar sesión o aplicación.
+   1 - Error al iniciar sesión o aplicación.
 
 ```
 En este caso, revisa la configuración de la base de datos o si esta
 está disponible
 ```
-### 2 - Error en el muestreo de datos de la tabla.
+   2 - Error en el muestreo de datos de la tabla.
 
 ```
 Ocurre a veces si se cambia la selección de la tabla cada poco
@@ -86,7 +86,7 @@ varios clientes.
 En ese caso pulsa el botón de recargar. Si tras eso no funciona
 inténtalo más tarde
 ```
-### 3 - Error al pulsar botones (No reaccionan).
+   3 - Error al pulsar botones (No reaccionan).
 
 ```
 Se desconocen los motivos de este error, se soluciona al reiniciar la
