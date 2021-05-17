@@ -95,3 +95,13 @@ aplicación.
 ```
 Proyecto creado por: Jaime, Juan y Pablo
 ```
+
+
+
+##Pasos para hacer funcionar el programa
+### 1 - Descargar la carpeta del proyecto
+### 2 - Importar el proyecto en eclipse
+### 3 - Tener instalada la extensión de JavaFX
+### 4 - Anadir al JavaBuildPath > Libraries > Modulepath las direcciones a la carpeta lib del proyecto, de javafx-sdk-11.0.2/lib y mysql-connector-java-8.0.23
+### 5 - Establecer los argumentos del Main de la siguiente manera ```--module-path Directory\AircraftCompetitionProgram\AircraftCompetition\javafx-sdk-11.0.2\lib --add-modules=javafx.controls,javafx.fxml```
+### 6 - Tras estos ajustes el proyecto debería funcionar sin problema
