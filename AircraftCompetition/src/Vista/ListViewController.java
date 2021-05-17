@@ -294,6 +294,7 @@ public class ListViewController {
 			dialogStage.setTitle("Nueva Competicion");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(MainApp.getPrimaryStage());
+			dialogStage.getIcons().add(new Image("file:resources/images/plane.png"));
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 

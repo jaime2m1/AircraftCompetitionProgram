@@ -43,13 +43,14 @@ public class DBConfigController {
 	 */
 	public void setData() {
 		DBConfigDAO dao = new DBConfigDAO();
-		String[] DBConfig;
+		String[] DBConfig = new String[5];
 		try {
 			DBConfig = dao.readDBConfig();
 			hostLabel.setText(DBConfig[0]);
 			databaseLabel.setText(DBConfig[1]);
 			userLabel.setText(DBConfig[2]);
 			passwordLabel.setText(DBConfig[3]);
+			
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			e.printStackTrace();
 		}
@@ -87,7 +88,7 @@ public class DBConfigController {
 			this.database = databaseLabel.getText();
 			this.user = userLabel.getText();
 			this.password = passwordLabel.getText();
-			String[] DBConfig = { host, database, user, password };
+			String[] DBConfig = { host, database, user, password , String.valueOf(0)};
 
 			try {
 				dao.updateDBConfig(DBConfig);

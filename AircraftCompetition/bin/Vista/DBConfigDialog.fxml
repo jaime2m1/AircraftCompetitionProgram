@@ -25,14 +25,5 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button mnemonicParsing="false" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../../resources/images/back.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
    </children>
 </AnchorPane>

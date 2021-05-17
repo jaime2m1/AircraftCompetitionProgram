@@ -243,6 +243,15 @@ public class UserDAO {
 		return puntuaciones;
 	}
 	
+	/**
+	 * Obtenemos las puntuaciones de X usuario en X competición
+	 * 
+	 * @param usuarioid
+	 * @param competicion
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public ArrayList<PuntuacionModelo> getPuntuacionesUsuarioCompeticion(int usuarioid, int competicion) throws SQLException, ClassNotFoundException{
 		//System.out.println("UserDAO - Ejecutamos la consulta de las puntuacionbes de usuario"+usuarioid+" en competicion"+competicion);
 		ArrayList<PuntuacionModelo> puntuacionesUsuarioCompeticion = new ArrayList<PuntuacionModelo>();

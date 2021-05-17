@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.Node;
 import javafx.stage.Modality;
@@ -77,6 +78,7 @@ public class LoginCreateController {
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(MainApp.getPrimaryStage());
 			Scene scene = new Scene(page);
+			dialogStage.getIcons().add(new Image("file:resources/images/plane.png"));
 			dialogStage.setScene(scene);
 
 			DBConfigController controller = loader.getController();
