@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><DBConfig>
-	<host>jaime2m1.gq</host>
-	<database>AircraftCompetitionDB</database>
-	<user>Aircraft</user>
-	<password>Competition</password>
-	<loginUser>1</loginUser>
+	<host></host>
+	<database></database>
+	<user></user>
+	<password></password>
+	<loginUser></loginUser>
 </DBConfig>
